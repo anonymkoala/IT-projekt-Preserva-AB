@@ -1,0 +1,45 @@
+body {
+    background-color: white;
+}
+button{
+	background-color: #e6e6e6;
+	color:#81CB08;
+	width: 100px;
+	font-size: 14px;
+	border-radius: 5px;
+	position: static;
+}
+li{
+	float:left;
+	padding: 10px;
+	list-style-type: none;
+	font-weight: bold;
+	font-size: 17px;
+}
+ul{
+	position:fixed;
+	left:7%;
+	top: 17%;
+
+}
+span{
+	padding: 6px;
+}
+
+
+.maincontent{
+			white-space: nowrap;
+			position: fixed;
+			width: 80%;
+			width: 850px;
+			overflow-y: scroll;
+			top: 25%; 
+			left: 12%;  Set this to the width of the navigation frame 
+			right: 18%;
+			bottom: 20%;
+			background: #e6e6e6;
+			border-width: 1px;
+			
+			
+
+}
