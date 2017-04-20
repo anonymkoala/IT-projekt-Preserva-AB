@@ -144,6 +144,7 @@ public class NewCustomer extends javax.swing.JFrame {
             public void run() {
                 new NewCustomer().setVisible(true);
                 System.out.println("Test1");
+                System.out.println("Funka fint!");
             }
         });
     }
