@@ -143,7 +143,7 @@ public class NewCustomer extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewCustomer().setVisible(true);
-                System.out.println("Test");
+                System.out.println("Test1");
             }
         });
     }
