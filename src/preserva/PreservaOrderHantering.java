@@ -6,7 +6,7 @@
 package preserva;
 
 
-import PreservaView.MainWindow;
+import PreservaView.MainWindowUI;
 import javax.swing.JFrame;
 
 /**
@@ -20,7 +20,7 @@ public class PreservaOrderHantering {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainWindow myFrame = new MainWindow();
+        MainWindowUI myFrame = new MainWindowUI();
         myFrame.setTitle("Administrera jobb");
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setLocationRelativeTo(null); //centrerad
