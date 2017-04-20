@@ -5,6 +5,8 @@
  */
 package preserva;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Patrik
@@ -27,21 +29,45 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        newCustomerBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        newCustomerBtn.setText("Ny Kund");
+        newCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(newCustomerBtn)
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(newCustomerBtn)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void newCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerBtnActionPerformed
+        NewCustomer caseFrame = new NewCustomer(); //Nytt objekt 
+        caseFrame.setTitle("Ny Kund"); //Titel på fönster
+        caseFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//Stäng
+        caseFrame.setLocationRelativeTo(null); //centrerad
+        caseFrame.pack(); //anpassar JFrame dialogen till kontrollernas storlek
+        caseFrame.setVisible(true); //Gör så att fönstret är synligt 
+    }//GEN-LAST:event_newCustomerBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +105,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton newCustomerBtn;
     // End of variables declaration//GEN-END:variables
 }
