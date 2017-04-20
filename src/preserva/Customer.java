@@ -11,6 +11,8 @@ package preserva;
  */
 public class Customer 
 {
+  //Variables
+    
   private String Name;
   private String phoneNumber;
   private String eMail;
@@ -18,6 +20,7 @@ public class Customer
     
   
   
+  //Get / Set-methods
   
   public String getName() {
         return Name;
