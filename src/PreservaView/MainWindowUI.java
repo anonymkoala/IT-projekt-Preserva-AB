@@ -90,14 +90,14 @@ public class MainWindowUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaKommentar = new javax.swing.JTextArea();
         txtDate = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
+        lblSkapaInsProfil = new javax.swing.JLabel();
         cmbKundnamn = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         JlistDomanNamn = new javax.swing.JList();
         jLabel20 = new javax.swing.JLabel();
-        addDomain = new javax.swing.JLabel();
+        lblAddDoman = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
@@ -121,7 +121,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PreservaView/header.jpg"))); // NOI18N
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setForeground(new java.awt.Color(129, 203, 8));
+        jTabbedPane1.setForeground(new java.awt.Color(148, 194, 29));
+        jTabbedPane1.setAutoscrolls(true);
         jTabbedPane1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -130,12 +131,18 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton7.setBackground(new java.awt.Color(124, 126, 44));
+        jButton7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(51, 51, 51));
         jButton7.setText("Samtliga");
 
+        jButton8.setBackground(new java.awt.Color(148, 176, 35));
         jButton8.setText("Pågående");
 
+        jButton9.setBackground(new java.awt.Color(148, 176, 35));
         jButton9.setText("Ej startade");
 
+        jButton10.setBackground(new java.awt.Color(148, 176, 35));
         jButton10.setText("Levererade");
 
         jLabel3.setText("90");
@@ -257,6 +264,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         cmbBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ej startad", "Pågår", "Klar", "Levererad" }));
 
         txtAreaKommentar.setColumns(20);
+        txtAreaKommentar.setLineWrap(true);
         txtAreaKommentar.setRows(5);
         jScrollPane2.setViewportView(txtAreaKommentar);
 
@@ -266,8 +274,13 @@ public class MainWindowUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel18.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel18.setText("Skapa/ändra profil");
+        lblSkapaInsProfil.setForeground(new java.awt.Color(0, 0, 255));
+        lblSkapaInsProfil.setText("Skapa/ändra profil");
+        lblSkapaInsProfil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSkapaInsProfilMouseClicked(evt);
+            }
+        });
 
         cmbKundnamn.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbKundnamn.addActionListener(new java.awt.event.ActionListener() {
@@ -289,16 +302,16 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jLabel20.setText("Insamlingsdomäner:");
 
-        addDomain.setForeground(new java.awt.Color(0, 0, 255));
-        addDomain.setText("Lägg till domän");
-        addDomain.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAddDoman.setForeground(new java.awt.Color(0, 0, 255));
+        lblAddDoman.setText("Lägg till domän");
+        lblAddDoman.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addDomainMouseClicked(evt);
+                lblAddDomanMouseClicked(evt);
             }
         });
-        addDomain.addKeyListener(new java.awt.event.KeyAdapter() {
+        lblAddDoman.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                addDomainKeyPressed(evt);
+                lblAddDomanKeyPressed(evt);
             }
         });
 
@@ -314,50 +327,63 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(230, 230, 230)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cmbKundnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtDate, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbBoxStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtInsamlingsdoman)
+                                .addComponent(cmbInsamlingsprofil, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel7Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblAddDoman))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                    .addGap(5, 5, 5)
+                                    .addComponent(lblSkapaInsProfil))))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(238, 238, 238)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbKundnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDate, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbBoxStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, 125, Short.MAX_VALUE)
-                            .addComponent(cmbInsamlingsprofil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtInsamlingsdoman))
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addDomain))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel18))))
-                    .addComponent(jLabel19)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addGap(43, 43, 43))
+                        .addGap(85, 85, 85))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20))
+                        .addContainerGap())))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(jLabel19)
-                            .addComponent(jLabel20))
+                            .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbKundnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(cmbKundnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -365,31 +391,26 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(txtInsamlingsdoman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addDomain))
+                            .addComponent(lblAddDoman))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(cmbInsamlingsprofil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(cmbBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(lblSkapaInsProfil))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(cmbBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addComponent(jButton5)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 802, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,12 +542,12 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKundnamnActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
-        setVisible(false);
-        dispose();
+        InsamlingMngr insamling = new InsamlingMngr();
+        setInsamlingAttribute(insamling);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void addDomainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDomainMouseClicked
+    private void lblAddDomanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddDomanMouseClicked
         String domanNamn = txtInsamlingsdoman.getText();
         if(domanNamn != null){
             domannamnArray.add(domanNamn);
@@ -537,11 +558,15 @@ public class MainWindowUI extends javax.swing.JFrame {
         }else if (domanNamn == null){
             JOptionPane.showMessageDialog(rootPane, "Felaktigt domännamn, vänligen skriv i formen www.example.com");
         }
-    }//GEN-LAST:event_addDomainMouseClicked
+    }//GEN-LAST:event_lblAddDomanMouseClicked
 
-    private void addDomainKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addDomainKeyPressed
+    private void lblAddDomanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblAddDomanKeyPressed
 
-    }//GEN-LAST:event_addDomainKeyPressed
+    }//GEN-LAST:event_lblAddDomanKeyPressed
+
+    private void lblSkapaInsProfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkapaInsProfilMouseClicked
+        JOptionPane.showMessageDialog(rootPane, "Skickar användare vidare till verktyg");
+    }//GEN-LAST:event_lblSkapaInsProfilMouseClicked
 
     /**
      * @param args the command line arguments
@@ -580,7 +605,6 @@ public class MainWindowUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList JlistDomanNamn;
-    private javax.swing.JLabel addDomain;
     private javax.swing.JComboBox cmbBoxStatus;
     private javax.swing.JComboBox cmbInsamlingsprofil;
     private javax.swing.JComboBox cmbKundnamn;
@@ -605,7 +629,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -628,6 +651,8 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblAddDoman;
+    private javax.swing.JLabel lblSkapaInsProfil;
     private javax.swing.JTextArea txtAreaKommentar;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtInsamlingsdoman;
@@ -646,6 +671,16 @@ public class MainWindowUI extends javax.swing.JFrame {
         Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
         return formatter.format(currentDate.getTime()).toUpperCase();
+    }
+
+    private void setInsamlingAttribute(InsamlingMngr insamling) {
+        insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
+        insamling.setStartDatum(txtDate.getText().toString());
+        insamling.setInsamlingsdoman(domannamnArray);
+        insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
+        insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
+        insamling.setKommentar(txtAreaKommentar.getText().toString());
+        JOptionPane.showMessageDialog(rootPane, "Insamling skapad!");
     }
 
 
