@@ -3,7 +3,9 @@ package PreservaView;
 import PreservaControl.InsamlingMngr;
 import java.awt.Color;
 import java.awt.Container;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -20,13 +22,19 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Patrik
+ * @author Patrik & Per
  */
 public class MainWindowUI extends javax.swing.JFrame {
-    
+    ArrayList domannamnArray = new ArrayList<>();
+    DefaultListModel listModel = new DefaultListModel();
     
     
     public void updateGUI() {
+        
+        for(int i = 0; i < domannamnArray.size(); i++){
+            listModel.addElement(domannamnArray.get(i));
+                    }
+        JlistDomanNamn.setModel(listModel);
         
     }
 
@@ -36,7 +44,8 @@ public class MainWindowUI extends javax.swing.JFrame {
      */
     public MainWindowUI() {
         initComponents();
-        initGUI();
+        initGUIMainFrame();
+        initGUIregInsamling();
 
     }
 
@@ -520,7 +529,9 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void addDomainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDomainMouseClicked
         String domanNamn = txtInsamlingsdoman.getText();
         if(domanNamn != null){
-            //domannamnArray.add(domanNamn);
+            domannamnArray.add(domanNamn);
+            JOptionPane.showMessageDialog(rootPane, "Felaktigt domännamn, vänligen skriv i formen www.example.com");
+
             updateGUI();
 
         }else if (domanNamn == null){
@@ -560,8 +571,6 @@ public class MainWindowUI extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         /* Create and display the form */
-       ArrayList domainList = new ArrayList<String>();
-       DefaultListModel insamlingList = new DefaultListModel();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindowUI().setVisible(true);
@@ -624,9 +633,19 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtInsamlingsdoman;
     // End of variables declaration//GEN-END:variables
 
-    private void initGUI() {
+    private void initGUIMainFrame() {
        Container a = this.getContentPane();
        a.setBackground(Color.white);
+    }
+
+    private void initGUIregInsamling() {
+      txtDate.setText(setDate());
+    }
+
+    private String setDate() {
+        Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
+        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
+        return formatter.format(currentDate.getTime()).toUpperCase();
     }
 
 
