@@ -680,11 +680,11 @@ public class MainWindowUI extends javax.swing.JFrame {
     }
     private void setInsamlingAttribute(InsamlingMngr insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
-        insamling.setStartDatum(txtDate.getText().toString());
+        insamling.setStartDatum(txtDate.getText());
         insamling.setInsamlingsdoman(domannamnArray);
         insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
         insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
-        insamling.setKommentar(txtAreaKommentar.getText().toString());
+        insamling.setKommentar(txtAreaKommentar.getText());
         
     }
 
@@ -710,9 +710,9 @@ public class MainWindowUI extends javax.swing.JFrame {
 
     private void setTableAttributes() {
      jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-     jTable1.getColumnModel().getColumn(1).setPreferredWidth(30);
+     jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
      jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
-     jTable1.getColumnModel().getColumn(3).setPreferredWidth(60);
+     jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
      jTable1.getColumnModel().getColumn(4).setPreferredWidth(22);
      jTable1.getColumnModel().getColumn(5).setPreferredWidth(36);
      jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
@@ -725,10 +725,42 @@ public class MainWindowUI extends javax.swing.JFrame {
      JTableHeader header = jTable1.getTableHeader();
      header.setBackground(green);
      jScrollPane4.setBackground(Color.white);
+     justForDemoPurpose();
     }
 
     private void clearInputs() {
     
         
+    }
+
+    private void justForDemoPurpose() {
+        int data0 = 123;
+        String data1 = "Preserva";
+        String data2 = "2017-04-26";
+        String data3 = "Ej startad";
+        String data4 = "www.preserva.se";
+        String data5 = "Ring Ole innan insamling påbörjar";
+        String data6 = "länk";
+        String data7 = "länk";
+        String data8 = "länk";
+        String data9 = "länk";
+        
+        Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(row);
+        
+        data0 = 122;
+        data1 = "Regeringenskansliet";
+        data2 = "2017-04-19";
+        data3 = "Pågår";
+        data4 = "www.regeringen.se";
+        data5 = "Ingen kommentar..";
+        data6 = "länk";
+        data7 = "länk";
+        data8 = "länk";
+        data9 = "länk";
+        
+        Object[] row2 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        model.addRow(row2);
     }
 }
