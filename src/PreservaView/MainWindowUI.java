@@ -46,8 +46,11 @@ public class MainWindowUI extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     public MainWindowUI() {
+        //Auto-generated code
         initComponents();
+        //Sets background and table-attributes
         initGUIMainFrame();
+        //Sets predefined values in insamling-tab
         initGUIregInsamling();
     }
     /**
@@ -567,17 +570,19 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void cmbKundnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKundnamnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbKundnamnActionPerformed
-
+//Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
         Insamling insamling = new Insamling();
         setInsamlingAttribute(insamling);
         updateGUI(insamling);
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
+        //NOT YET IMPLEMENTED, MEANT TO CLEAR INPUTS
         clearInputs();
         
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
 
     private void lblAddDomanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddDomanMouseClicked
+        //Adds domains to the list with domain by clicking on label
         String domanNamn = txtInsamlingsdoman.getText();
         if(domanNamn != null){
             domannamnArray.add(domanNamn);
@@ -700,13 +705,15 @@ public class MainWindowUI extends javax.swing.JFrame {
        
     }
     private void initGUIregInsamling() {
-      txtDate.setText(setDate());
+      txtDate.setText(getDate());
     }
-    private String setDate() {
+    //Gets todays date
+    private String getDate() {
         Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
         return formatter.format(currentDate.getTime()).toUpperCase();
     }
+    //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(Insamling insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
         insamling.setStartDatum(txtDate.getText());
@@ -716,7 +723,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         insamling.setKommentar(txtAreaKommentar.getText());
         
     }
-
+    //Hard-coded to show how the list will turn out
     private void updateGUI(Insamling insamling) {
         listInsamling.addElement(insamling.toString());
         //jListInsamling.setLayoutOrientation(JList.VERTICAL);
@@ -736,7 +743,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
     }
-
+    //Sets attributes, (width, color) to the jTable
     private void setTableAttributes() {
      jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
      jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
