@@ -1,6 +1,5 @@
 package PreservaView;
 
-import PreservaControl.InsamlingMngr;
 import java.awt.Color;
 import java.awt.Container;
 import java.text.SimpleDateFormat;
@@ -36,11 +35,12 @@ public class MainWindowUI extends javax.swing.JFrame {
     
     
     public void updateGUI() {
-        
+        JlistDomanNamn.setModel(listModel);  
+        listModel.clear();
         for(int i = 0; i < domannamnArray.size(); i++){
             listModel.addElement(domannamnArray.get(i));
             }
-        JlistDomanNamn.setModel(listModel);  
+        
     }
     /**
      * Creates new form MainWindow
@@ -569,7 +569,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKundnamnActionPerformed
 
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
-        InsamlingMngr insamling = new InsamlingMngr();
+        Insamling insamling = new Insamling();
         setInsamlingAttribute(insamling);
         updateGUI(insamling);
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
@@ -707,7 +707,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
         return formatter.format(currentDate.getTime()).toUpperCase();
     }
-    private void setInsamlingAttribute(InsamlingMngr insamling) {
+    private void setInsamlingAttribute(Insamling insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
         insamling.setStartDatum(txtDate.getText());
         insamling.setInsamlingsdoman(domannamnArray);
@@ -717,11 +717,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         
     }
 
-    private void updateGUI(InsamlingMngr insamling) {
+    private void updateGUI(Insamling insamling) {
         listInsamling.addElement(insamling.toString());
         //jListInsamling.setLayoutOrientation(JList.VERTICAL);
         //jListInsamling.setModel(listInsamling);
-        int data0 = 123;
+        int data0 = 124;
         String data1 = insamling.getKundnamn();
         String data2 = insamling.getStartDatum();
         String data3 = insamling.getStatus();
@@ -765,22 +765,22 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void justForDemoPurpose() {
         int data0 = 123;
         String data1 = "Preserva";
-        String data2 = "2017-04-26";
+        String data2 = "26/4/2017";
         String data3 = "Ej startad";
         String data4 = "www.preserva.se";
         String data5 = "Ring Ole innan insamling påbörjar";
         String data6 = "länk";
         String data7 = "länk";
         String data8 = "länk";
-        String data9 = "länk";
+        String data9 = "Starta insamling";
         
-        Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        Object[] row1 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row);
+        model.addRow(row1);
         
         data0 = 122;
         data1 = "Regeringenskansliet";
-        data2 = "2017-04-19";
+        data2 = "28/4/2017";
         data3 = "Pågår";
         data4 = "www.regeringen.se";
         data5 = "Ingen kommentar..";

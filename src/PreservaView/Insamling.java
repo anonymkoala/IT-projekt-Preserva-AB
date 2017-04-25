@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PreservaControl;
+package PreservaView;
 
 import PreservaView.MainWindowUI;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Per
  */
-public class InsamlingMngr {
+public class Insamling {
     private String startDatum;
     private String Kommentar;
     private ArrayList insamlingsdoman = new ArrayList<String>();
@@ -24,14 +24,14 @@ public class InsamlingMngr {
     private String kundnamn;
     private int insamlingsNr;
     
-    public InsamlingMngr(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
+    public Insamling(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
      this.kundnamn = kundnamn;
      this.startDatum = startDatum;
      this.insamlingsprofil = insamlingsprofil;
      this.Kommentar = kommentar;
     }
     
-    public InsamlingMngr() {
+    public Insamling() {
    
     }
 
@@ -185,11 +185,6 @@ public class InsamlingMngr {
      */
     public void setInsamlingsNr(int insamlingsNr) {
         this.insamlingsNr = insamlingsNr;
-    }
-    @Override
-    public String toString() {
-        System.out.println("Rad tillagd!");
-    return (this.kundnamn + "      " + this.startDatum + "            " + this.insamladWebbplats + "          " + this.status + "        " + this.Kommentar + "            ");
     }
     
 }
