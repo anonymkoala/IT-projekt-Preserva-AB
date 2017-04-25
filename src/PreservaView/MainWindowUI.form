@@ -721,12 +721,12 @@
                                   <Component id="customerName" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Component id="customerPhoneNumber" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Component id="customerEmail" min="-2" pref="289" max="-2" attributes="0"/>
-                                  <Component id="customerAdress" min="-2" pref="289" max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="289" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="289" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerCity" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerStreet" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerPostCode" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerOrgNr" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="createNewCustomerBtn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -755,27 +755,27 @@
                               </Group>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="customerAdress" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="customerCity" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="customerStreet" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="customerPostCode" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="customerOrgNr" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="17" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jButton4" pref="33" max="32767" attributes="0"/>
+                                  <Component id="createNewCustomerBtn" pref="33" max="32767" attributes="0"/>
                                   <Component id="jButton3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
@@ -789,7 +789,7 @@
                         <Property name="text" type="java.lang.String" value="Insamlingsprofil"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton4">
+                    <Component class="javax.swing.JButton" name="createNewCustomerBtn">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Skapa Ny Kund"/>
                       </Properties>
@@ -799,7 +799,7 @@
                         <Property name="text" type="java.lang.String" value="Stad:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="customerAdress">
+                    <Component class="javax.swing.JTextField" name="customerCity">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
@@ -837,11 +837,11 @@
                         <Property name="text" type="java.lang.String" value="OrgNr:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField1">
+                    <Component class="javax.swing.JTextField" name="customerStreet">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField2">
+                    <Component class="javax.swing.JTextField" name="customerPostCode">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField3">
+                    <Component class="javax.swing.JTextField" name="customerOrgNr">
                     </Component>
                   </SubComponents>
                 </Container>
