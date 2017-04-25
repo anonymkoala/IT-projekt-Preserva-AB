@@ -3,28 +3,64 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Preserva.control;
+package PreservaControl;
 
+import PreservaView.MainWindowUI;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Per
  */
-public class OrderMngr {
+public class InsamlingMngr {
     private String startDatum;
     private String Kommentar;
     private ArrayList insamlingsdoman = new ArrayList<String>();
-    private String[] status = new String[]{"Pågående", "Ej startad", "Klar", "Levererad"};
+    private String status;
     private String insamlingsprofil;
     private String insamladWebbplats;
     private String insamlingsRapport;
+    private String kundnamn;
+    private int insamlingsNr;
     
-    public OrderMngr(){
-        
-        
+    public InsamlingMngr(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
+     this.kundnamn = kundnamn;
+     this.startDatum = startDatum;
+     this.insamlingsprofil = insamlingsprofil;
+     this.Kommentar = kommentar;
+    }
+    
+    public InsamlingMngr() {
+   
     }
 
+    /*
+    private String addToDB(){
+        
+        try{
+            //Anropa metod i StudentMngr (control-klassen) för att lägga till student
+            ArendeMngr emgr = new ArendeMngr();
+            if (emgr.addArendeToDb(arende).equals("success")){
+                JOptionPane.showMessageDialog(this, "Ärendet lades till i databasen");
+            }else{
+                JOptionPane.showMessageDialog(this, "Kunde inte lägga till Ärende!");
+            }
+        //Fånga eventuella run-time fel: vanligast i detta fall är försök att lägga till poster
+        //med samma PK    
+        } catch (RollbackException ex) {
+            JOptionPane.showMessageDialog(this, "Databasfel!\r "
+                    + "Exekvering mot db avbröts eftersom det skulle ha orsakat en dubblettnyckel i tabellen Ärende ");   
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "FEL! " + ex.getMessage());
+        
+        }
+        
+        
+        return "";
+        
+    }
+    */
     /**
      * @return the startDatum
      */
@@ -56,14 +92,14 @@ public class OrderMngr {
     /**
      * @return the status
      */
-    public String[] getStatus() {
+    public String getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStatus(String[] status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -122,7 +158,38 @@ public class OrderMngr {
     public void setInsamlingsdoman(ArrayList insamlingsdoman) {
         this.insamlingsdoman = insamlingsdoman;
     }
-    
-    
+
+    /**
+     * @return the kundnamn
+     */
+    public String getKundnamn() {
+        return kundnamn;
+    }
+
+    /**
+     * @param kundnamn the kundnamn to set
+     */
+    public void setKundnamn(String kundnamn) {
+        this.kundnamn = kundnamn;
+    }
+
+    /**
+     * @return the insamlingsNr
+     */
+    public int getInsamlingsNr() {
+        return insamlingsNr;
+    }
+
+    /**
+     * @param insamlingsNr the insamlingsNr to set
+     */
+    public void setInsamlingsNr(int insamlingsNr) {
+        this.insamlingsNr = insamlingsNr;
+    }
+    @Override
+    public String toString() {
+        System.out.println("Rad tillagd!");
+    return (this.kundnamn + "      " + this.startDatum + "            " + this.insamladWebbplats + "          " + this.status + "        " + this.Kommentar + "            ");
+    }
     
 }
