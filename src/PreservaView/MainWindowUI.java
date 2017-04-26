@@ -119,10 +119,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         customerStreetTxtField = new javax.swing.JTextField();
         customerPostCodeTxtField = new javax.swing.JTextField();
-        customerOrgNrTxtField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -462,8 +460,6 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jLabel18.setText("Postkod:");
 
-        jLabel21.setText("OrgNr:");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -476,8 +472,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel21))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(customerNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,7 +481,6 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(customerCityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customerStreetTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customerPostCodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerOrgNrTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(createNewCustomerBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -520,11 +514,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(customerPostCodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(customerOrgNrTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(createNewCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -628,7 +618,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         c.setCity((String)customerCityTxtField.getText());
         c.setStreet((String)customerStreetTxtField.getText());
         c.setPostCode((String)customerPostCodeTxtField.getText());
-        c.setOrgNr((String)customerOrgNrTxtField.getText());
+        //c.setOrgNr((String)customerOrgNrTxtField.getText());
         
         //Connect to database and add the new customer.
         try {    
@@ -690,7 +680,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField customerCityTxtField;
     private javax.swing.JTextField customerEmailTxtField;
     private javax.swing.JTextField customerNameTxtField;
-    private javax.swing.JTextField customerOrgNrTxtField;
     private javax.swing.JTextField customerPhoneNumberTxtField;
     private javax.swing.JTextField customerPostCodeTxtField;
     private javax.swing.JTextField customerStreetTxtField;
@@ -713,7 +702,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

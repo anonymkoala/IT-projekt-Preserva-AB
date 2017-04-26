@@ -41,12 +41,12 @@ public class CustomerEntity
         {
             //Uppkoppling mot databasen
             Class.forName("com.mysql.jdbc.Driver");            
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/skola1","root","skola");                        
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservadb","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }                       
             //SQL-statement som skickas till databasen:
-            PreparedStatement stmt = cn.prepareStatement("SELECT kundID FROM tbl_Kund");
+            PreparedStatement stmt = cn.prepareStatement("SELECT kundID FROM kund");
             //Resultatet från SQL-satsen sparas i ett ResultSet                
             ResultSet rs = stmt.executeQuery();
             //
@@ -82,14 +82,14 @@ public class CustomerEntity
         {
             //Uppkoppling mot databasen
             Class.forName("com.mysql.jdbc.Driver");            
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/skola1","root","skola");                        
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservadb","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
                        
             //SQL-statement som skickas till databasen:
-            PreparedStatement stmt = cn.prepareStatement("INSERT INTO tbl_Kund (kundID,name,phonenr,email,city,street,postcode,orgnr)"
-                            + "VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement stmt = cn.prepareStatement("INSERT INTO kund (kundID,namn,telefonnr,email,gatuadress,postnr,stad)"
+                            + "VALUES (?,?,?,?,?,?,?)");
             //Värden som skickas med i SQL-satsen. 
             //1:an står för vilket at frågetecknen värdet ska ersätta.
             //Sedan metoden för att hämta värdet.
@@ -97,10 +97,10 @@ public class CustomerEntity
             stmt.setString(2, getName());
             stmt.setString(3, getPhoneNr());
             stmt.setString(4, getEmail());
-            stmt.setString(5, getCity());
-            stmt.setString(6, getStreet());
-            stmt.setString(7, getPostCode());
-            stmt.setString(8, getOrgNr());           
+            stmt.setString(7, getCity());
+            stmt.setString(5, getStreet());
+            stmt.setString(6, getPostCode());
+                       
             //Kör SQL-uttrycket
             int i = stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:

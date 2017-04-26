@@ -714,7 +714,6 @@
                                   <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -724,7 +723,6 @@
                                   <Component id="customerCityTxtField" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Component id="customerStreetTxtField" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Component id="customerPostCodeTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                  <Component id="customerOrgNrTxtField" min="-2" pref="289" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="createNewCustomerBtn" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -768,12 +766,7 @@
                                   <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="customerPostCodeTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="customerOrgNrTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="46" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="createNewCustomerBtn" pref="33" max="32767" attributes="0"/>
                                   <Component id="jButton3" max="32767" attributes="0"/>
@@ -835,16 +828,9 @@
                         <Property name="text" type="java.lang.String" value="Postkod:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel21">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="OrgNr:"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JTextField" name="customerStreetTxtField">
                     </Component>
                     <Component class="javax.swing.JTextField" name="customerPostCodeTxtField">
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="customerOrgNrTxtField">
                     </Component>
                   </SubComponents>
                 </Container>
