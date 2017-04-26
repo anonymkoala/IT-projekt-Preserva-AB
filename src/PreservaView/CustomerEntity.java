@@ -14,6 +14,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -41,7 +43,7 @@ public class CustomerEntity
         {
             //Uppkoppling mot databasen
             Class.forName("com.mysql.jdbc.Driver");            
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservadb","root","skola");                        
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }                       
@@ -73,6 +75,7 @@ public class CustomerEntity
     }
     
     
+    
     public String addCustomer() throws SQLException 
     {        
         //konrollera status på SQL-exekveringen
@@ -82,7 +85,7 @@ public class CustomerEntity
         {
             //Uppkoppling mot databasen
             Class.forName("com.mysql.jdbc.Driver");            
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservadb","root","skola");                        
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
@@ -181,5 +184,12 @@ public class CustomerEntity
     public void setCustomerNR(int customerNr){
         this.customerNr = customerNr;
     }
+
+
+    }
     
-}
+     
+    
+        
+        
+

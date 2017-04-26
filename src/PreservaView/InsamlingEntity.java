@@ -6,6 +6,10 @@
 package PreservaView;
 
 import PreservaView.MainWindowUI;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -16,10 +20,10 @@ import javax.swing.JOptionPane;
 public class InsamlingEntity {
     private String startDatum;
     private String Kommentar;
-    private ArrayList insamlingsdoman = new ArrayList<String>();
+    private ArrayList doman = new ArrayList<String>();
     private String status;
     private String insamlingsprofil;
-    private String insamladWebbplats;
+    private String insamlingsURL;
     private String insamlingsRapport;
     private String kundnamn;
     private int insamlingsNr;
@@ -34,36 +38,52 @@ public class InsamlingEntity {
     public InsamlingEntity() {
    
     }
-
-    /*
-    private String addToDB(){
-        
-        try{
-            //Anropa metod i StudentMngr (control-klassen) för att lägga till student
-            ArendeMngr emgr = new ArendeMngr();
-            if (emgr.addArendeToDb(arende).equals("success")){
-                JOptionPane.showMessageDialog(this, "Ärendet lades till i databasen");
-            }else{
-                JOptionPane.showMessageDialog(this, "Kunde inte lägga till Ärende!");
+public String addInsamling() throws SQLException 
+    {        
+        //konrollera status på SQL-exekveringen
+        String sRet = "failure";
+        Connection cn = null;
+        try 
+        {
+            //Uppkoppling mot databasen
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
             }
-        //Fånga eventuella run-time fel: vanligast i detta fall är försök att lägga till poster
-        //med samma PK    
-        } catch (RollbackException ex) {
-            JOptionPane.showMessageDialog(this, "Databasfel!\r "
-                    + "Exekvering mot db avbröts eftersom det skulle ha orsakat en dubblettnyckel i tabellen Ärende ");   
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "FEL! " + ex.getMessage());
-        
+                       
+            //SQL-statement som skickas till databasen:
+            PreparedStatement stmt = cn.prepareStatement("INSERT INTO insamling (InsamlingsID ,startdatum,status,insamlingsprofilURL,startaInsamlingURL,rapportURL, kommentar, kundID)"
+                            + "VALUES (?,?,?,?,?,?,?,?)" );
+            //Värden som skickas med i SQL-satsen. 
+            //1:an står för vilket at frågetecknen värdet ska ersätta.
+            //Sedan metoden för att hämta värdet.
+            stmt.setInt(1, getInsamlingsNr());
+            stmt.setString(2, getStartDatum());
+            stmt.setString(3, getStatus());
+            stmt.setString(7, getKommentar());
+            stmt.setString(4, getInsamlingsprofil());
+            stmt.setString(5, getInsamlingsRapport());
+            stmt.setString(6, getInsamlingsRapport());
+            stmt.setInt(8, 2);
+                       
+            //Kör SQL-uttrycket
+            int i = stmt.executeUpdate();
+            //Kontrollerar så SQL-satsen gick in:
+            if (i > 0) sRet = "success";
+            return sRet; //returnera status från SQL-exekvering (failure/success)
         }
-        
-        
-        return "";
-        
+        //Fångar fel:
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }
+        finally //Stänger anslutningen mot databasen:
+        {
+            if (cn!=null) 
+                cn.close();
+        }
     }
-    */
-    /**
-     * @return the startDatum
-     */
+ 
     public String getStartDatum() {
         return startDatum;
     }
@@ -118,17 +138,17 @@ public class InsamlingEntity {
     }
 
     /**
-     * @return the insamladWebbplats
+     * @return the insamlingsURL
      */
-    public String getInsamladWebbplats() {
-        return insamladWebbplats;
+    public String getInsamlingsURL() {
+        return insamlingsURL;
     }
 
     /**
-     * @param insamladWebbplats the insamladWebbplats to set
+     * @param insamlingsURL the insamlingsURL to set
      */
-    public void setInsamladWebbplats(String insamladWebbplats) {
-        this.insamladWebbplats = insamladWebbplats;
+    public void setInsamlingsURL(String insamlingsURL) {
+        this.insamlingsURL = insamlingsURL;
     }
 
     /**
@@ -146,17 +166,17 @@ public class InsamlingEntity {
     }
 
     /**
-     * @return the insamlingsdoman
+     * @return the doman
      */
-    public ArrayList getInsamlingsdoman() {
-        return insamlingsdoman;
+    public ArrayList getDoman() {
+        return doman;
     }
 
     /**
-     * @param insamlingsdoman the insamlingsdoman to set
+     * @param doman the doman to set
      */
-    public void setInsamlingsdoman(ArrayList insamlingsdoman) {
-        this.insamlingsdoman = insamlingsdoman;
+    public void setDoman(ArrayList doman) {
+        this.doman = doman;
     }
 
     /**

@@ -19,6 +19,7 @@ import javax.swing.table.JTableHeader;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -205,7 +206,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
                     .addComponent(jLabel6))
-                .addGap(0, 197, Short.MAX_VALUE))
+                .addGap(0, 204, Short.MAX_VALUE))
         );
 
         jScrollPane4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(148, 176, 35), 2, true));
@@ -416,7 +417,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(114, 114, 114)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnCreateInsamling)
                 .addGap(42, 42, 42))
         );
@@ -425,11 +426,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Registrera Insamling", jPanel4);
@@ -514,7 +515,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(customerPostCodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(createNewCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -554,7 +555,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -577,9 +578,31 @@ public class MainWindowUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
         //NOT YET IMPLEMENTED, MEANT TO CLEAR INPUTS
         clearInputs();
+        //Connect to database and add the new customer.
+        try {    
+          //Anropa metod för att lägga till case
+            if (insamling.addInsamling().equals("success")){
+                JOptionPane.showMessageDialog(this, "New insamling added to db!");                
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Could not create new insamling..");
+            }
+        } catch (SQLException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }
         
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
 
+     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
+    private void setInsamlingAttribute(InsamlingEntity insamling) {
+        insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
+        insamling.setStartDatum(txtDate.getText());
+        insamling.setDoman(domannamnArray);
+        insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
+        insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
+        insamling.setKommentar(txtAreaKommentar.getText());
+        
+    }
     private void lblAddDomanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddDomanMouseClicked
         //Adds domains to the list with domain by clicking on label
         String domanNamn = txtInsamlingsdoman.getText();
@@ -632,7 +655,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         } catch (SQLException | HeadlessException ex) {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_createNewCustomerBtnActionPerformed
 
     /**
@@ -739,6 +762,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }
     private void initGUIregInsamling() {
       txtDate.setText(getDate());
+      
     }
     //Gets todays date
     private String getDate() {
@@ -746,21 +770,10 @@ public class MainWindowUI extends javax.swing.JFrame {
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
         return formatter.format(currentDate.getTime()).toUpperCase();
     }
-    //Sets insamlingAttribute based on inputs made in register insamling-tab. 
-    private void setInsamlingAttribute(InsamlingEntity insamling) {
-        insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
-        insamling.setStartDatum(txtDate.getText());
-        insamling.setInsamlingsdoman(domannamnArray);
-        insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
-        insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
-        insamling.setKommentar(txtAreaKommentar.getText());
-        
-    }
+   
     //Hard-coded to show how the list will turn out
     private void updateGUI(InsamlingEntity insamling) {
         listInsamling.addElement(insamling.toString());
-        //jListInsamling.setLayoutOrientation(JList.VERTICAL);
-        //jListInsamling.setModel(listInsamling);
         int data0 = 124;
         String data1 = insamling.getKundnamn();
         String data2 = insamling.getStartDatum();
@@ -832,4 +845,5 @@ public class MainWindowUI extends javax.swing.JFrame {
         Object[] row2 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
         model.addRow(row2);
     }
-}
+    }
+
