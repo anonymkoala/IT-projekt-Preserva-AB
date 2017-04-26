@@ -572,7 +572,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKundnamnActionPerformed
 //Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
-        Insamling insamling = new Insamling();
+        InsamlingEntity insamling = new InsamlingEntity();
         setInsamlingAttribute(insamling);
         updateGUI(insamling);
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
@@ -714,7 +714,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         return formatter.format(currentDate.getTime()).toUpperCase();
     }
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
-    private void setInsamlingAttribute(Insamling insamling) {
+    private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
         insamling.setStartDatum(txtDate.getText());
         insamling.setInsamlingsdoman(domannamnArray);
@@ -724,7 +724,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         
     }
     //Hard-coded to show how the list will turn out
-    private void updateGUI(Insamling insamling) {
+    private void updateGUI(InsamlingEntity insamling) {
         listInsamling.addElement(insamling.toString());
         //jListInsamling.setLayoutOrientation(JList.VERTICAL);
         //jListInsamling.setModel(listInsamling);

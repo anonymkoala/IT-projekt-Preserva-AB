@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Per
  */
-public class Insamling {
+public class InsamlingEntity {
     private String startDatum;
     private String Kommentar;
     private ArrayList insamlingsdoman = new ArrayList<String>();
@@ -24,14 +24,14 @@ public class Insamling {
     private String kundnamn;
     private int insamlingsNr;
     
-    public Insamling(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
+    public InsamlingEntity(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
      this.kundnamn = kundnamn;
      this.startDatum = startDatum;
      this.insamlingsprofil = insamlingsprofil;
      this.Kommentar = kommentar;
     }
     
-    public Insamling() {
+    public InsamlingEntity() {
    
     }
 
