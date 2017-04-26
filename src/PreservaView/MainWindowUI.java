@@ -2,6 +2,7 @@ package PreservaView;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -106,19 +110,19 @@ public class MainWindowUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         createNewCustomerBtn = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        customerCity = new javax.swing.JTextField();
+        customerCityTxtField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        customerEmail = new javax.swing.JTextField();
-        customerPhoneNumber = new javax.swing.JTextField();
+        customerEmailTxtField = new javax.swing.JTextField();
+        customerPhoneNumberTxtField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        customerName = new javax.swing.JTextField();
+        customerNameTxtField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        customerStreet = new javax.swing.JTextField();
-        customerPostCode = new javax.swing.JTextField();
-        customerOrgNr = new javax.swing.JTextField();
+        customerStreetTxtField = new javax.swing.JTextField();
+        customerPostCodeTxtField = new javax.swing.JTextField();
+        customerOrgNrTxtField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -440,6 +444,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         jButton3.setText("Insamlingsprofil");
 
         createNewCustomerBtn.setText("Skapa Ny Kund");
+        createNewCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createNewCustomerBtnActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Stad:");
 
@@ -471,13 +480,13 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(jLabel21))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(customerName, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerCity, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerOrgNr, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerPhoneNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerEmailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerCityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerStreetTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerPostCodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerOrgNrTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(createNewCustomerBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -490,32 +499,32 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(customerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(customerPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerPhoneNumberTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(customerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerEmailTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerCityTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerStreetTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(customerPostCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerPostCodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(customerOrgNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(customerOrgNrTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(createNewCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -600,6 +609,42 @@ public class MainWindowUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Skickar användare vidare till verktyg");
     }//GEN-LAST:event_lblSkapaInsProfilMouseClicked
 
+    private void createNewCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewCustomerBtnActionPerformed
+        //Create new Customer Entity Class
+        CustomerEntity c = new CustomerEntity();
+        
+        //Get the current number of customers in the database.
+        //Then increase that number by one.
+        try {
+            c.setCustomerNR(c.getNrOfCustomers()+1);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Get info from textfields and insert into variables.
+        c.setName((String)customerNameTxtField.getText());
+        c.setPhoneNr((String)customerPhoneNumberTxtField.getText());
+        c.setEmail((String)customerEmailTxtField.getText());
+        c.setCity((String)customerCityTxtField.getText());
+        c.setStreet((String)customerStreetTxtField.getText());
+        c.setPostCode((String)customerPostCodeTxtField.getText());
+        c.setOrgNr((String)customerOrgNrTxtField.getText());
+        
+        //Connect to database and add the new customer.
+        try {    
+          //Anropa metod för att lägga till case
+            if (c.addCustomer().equals("success")){
+                JOptionPane.showMessageDialog(this, "New customer added to db!");                
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Could not create new customer..");
+            }
+        } catch (SQLException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_createNewCustomerBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,13 +687,13 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbInsamlingsprofil;
     private javax.swing.JComboBox cmbKundnamn;
     private javax.swing.JButton createNewCustomerBtn;
-    private javax.swing.JTextField customerCity;
-    private javax.swing.JTextField customerEmail;
-    private javax.swing.JTextField customerName;
-    private javax.swing.JTextField customerOrgNr;
-    private javax.swing.JTextField customerPhoneNumber;
-    private javax.swing.JTextField customerPostCode;
-    private javax.swing.JTextField customerStreet;
+    private javax.swing.JTextField customerCityTxtField;
+    private javax.swing.JTextField customerEmailTxtField;
+    private javax.swing.JTextField customerNameTxtField;
+    private javax.swing.JTextField customerOrgNrTxtField;
+    private javax.swing.JTextField customerPhoneNumberTxtField;
+    private javax.swing.JTextField customerPostCodeTxtField;
+    private javax.swing.JTextField customerStreetTxtField;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
