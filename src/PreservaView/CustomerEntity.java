@@ -40,8 +40,8 @@ public class CustomerEntity
         try 
         {
             //Uppkoppling mot databasen
-            Class.forName("org.apache.derby.jdbc.ClientDriver");            
-            cn = DriverManager.getConnection("jdbc:derby://localhost:1527/CaseHandler1;create=true;user=Patrik;password=patrik");                        
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/skola1","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }                       
@@ -81,8 +81,8 @@ public class CustomerEntity
         try 
         {
             //Uppkoppling mot databasen
-            Class.forName("org.apache.derby.jdbc.ClientDriver");            
-            cn = DriverManager.getConnection("jdbc:derby://localhost:1527/CaseHandler1;create=true;user=Patrik;password=patrik");                        
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/skola1","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
