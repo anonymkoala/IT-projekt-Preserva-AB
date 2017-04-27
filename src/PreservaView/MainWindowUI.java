@@ -600,7 +600,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
-
     private void cmbKundnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKundnamnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbKundnamnActionPerformed
@@ -618,7 +617,6 @@ public class MainWindowUI extends javax.swing.JFrame {
             if (insamling.addInsamling().equals("success")){
             JOptionPane.showMessageDialog(this, "New insamling added to db!"); 
             clearInsInputs();
-                //dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
@@ -626,8 +624,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
-
-     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
+    //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
         insamling.setStartDatum(txtDate.getText());
@@ -647,15 +644,12 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Felaktigt domännamn, vänligen skriv i formen www.example.com");
         }
     }//GEN-LAST:event_lblAddDomanMouseClicked
-
     private void lblAddDomanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblAddDomanKeyPressed
 
     }//GEN-LAST:event_lblAddDomanKeyPressed
-
     private void lblSkapaInsProfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSkapaInsProfilMouseClicked
         JOptionPane.showMessageDialog(rootPane, "Skickar användare vidare till verktyg");
     }//GEN-LAST:event_lblSkapaInsProfilMouseClicked
-
     private void createNewCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewCustomerBtnActionPerformed
         //Create new Customer Entity Class
         CustomerEntity c = new CustomerEntity();
