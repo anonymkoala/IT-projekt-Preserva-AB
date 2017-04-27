@@ -36,7 +36,7 @@ public class CustomerEntity
             
     public int getNrOfCustomers() throws SQLException
     {
-        //konrollera status på SQL-exekveringen
+        //konrollera status på SQL-exekveringen        
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -51,17 +51,17 @@ public class CustomerEntity
             PreparedStatement stmt = cn.prepareStatement("SELECT kundID FROM kund");
             //Resultatet från SQL-satsen sparas i ett ResultSet                
             ResultSet rs = stmt.executeQuery();
-            //
+            stmt.executeQuery();          
             while (rs.next()){
                 //Skapar ett nytt objekt och fyller i variablerna
                 CustomerEntity c = new CustomerEntity();
                 c.setCustomerNR(rs.getInt("kundID"));
             }        
             //Kör SQL-uttrycket
-            int i = stmt.executeUpdate();
+            //stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
             
-            return this.customerNr; //returnera status från SQL-exekvering (failure/success)
+            return this.customerNr;
         }
         //Fångar fel:
         catch (ClassNotFoundException | SQLException ex) {
