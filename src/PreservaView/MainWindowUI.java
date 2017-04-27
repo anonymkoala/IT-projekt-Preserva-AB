@@ -564,6 +564,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     {
         String sRet = "failure";
         Connection cn = null;
+        cmbKundnamn.removeAllItems();
         try
         {
             Class.forName("com.mysql.jdbc.Driver");            
@@ -677,7 +678,6 @@ public class MainWindowUI extends javax.swing.JFrame {
             if (c.addCustomer().equals("success")){
                 JOptionPane.showMessageDialog(this, "New customer added to db!");
                 updateNameCmb();                
-                //dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new customer..");
             }
@@ -687,11 +687,16 @@ public class MainWindowUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_createNewCustomerBtnActionPerformed
     private void initGUIMainFrame() {
-       Container a = this.getContentPane();
-       a.setBackground(Color.white);
-       setTableAttributes();
-       JTabbedPane tabp = new JTabbedPane();
-       tabp.setBackground(Color.red);
+        try {
+            Container a = this.getContentPane();
+            a.setBackground(Color.white);
+            setTableAttributes();
+            JTabbedPane tabp = new JTabbedPane();
+            tabp.setBackground(Color.red);
+            updateNameCmb();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
        
     }
