@@ -33,7 +33,7 @@ public class CustomerEntity
     private String orgNr;
     private int customerNr;
     
-    
+            
     public int getNrOfCustomers() throws SQLException
     {
         //konrollera status på SQL-exekveringen

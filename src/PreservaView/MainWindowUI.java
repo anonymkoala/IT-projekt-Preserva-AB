@@ -2,6 +2,10 @@ package PreservaView;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,13 +48,13 @@ public class MainWindowUI extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
-    public MainWindowUI() {
+    public MainWindowUI(){
         //Auto-generated code
         initComponents();
         //Sets background and table-attributes
         initGUIMainFrame();
         //Sets predefined values in insamling-tab
-        initGUIregInsamling();
+        initGUIregInsamling();                
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -289,7 +293,6 @@ public class MainWindowUI extends javax.swing.JFrame {
             }
         });
 
-        cmbKundnamn.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ny Kund", "Preserva", "Regering", "Riksdag" }));
         cmbKundnamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbKundnamnActionPerformed(evt);
@@ -420,11 +423,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Registrera Insamling", jPanel4);
@@ -549,7 +552,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
 
         getContentPane().add(jPanel1);
@@ -557,6 +560,38 @@ public class MainWindowUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateNameCmb() throws SQLException
+    {
+        String sRet = "failure";
+        Connection cn = null;
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            
+            //SQL-statement som skickas till databasen:
+            PreparedStatement stmt = cn.prepareStatement("SELECT namn FROM kund");
+            //Resultatet från SQL-satsen sparas i ett ResultSet                
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                //Add items to combobox
+                cmbKundnamn.addItem(rs.getString("namn"));
+            }
+        }
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }
+        finally //Stänger anslutningen mot databasen:
+        {
+            if (cn!=null) 
+                cn.close();
+        }
+    }
+    
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
@@ -640,7 +675,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         try {    
           //Anropa metod för att lägga till case
             if (c.addCustomer().equals("success")){
-                JOptionPane.showMessageDialog(this, "New customer added to db!");                
+                JOptionPane.showMessageDialog(this, "New customer added to db!");
+                updateNameCmb();                
                 //dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new customer..");
@@ -659,9 +695,8 @@ public class MainWindowUI extends javax.swing.JFrame {
        
        
     }
-    private void initGUIregInsamling() {
-      txtDate.setText(getDate());
-      
+    private void initGUIregInsamling(){
+      txtDate.setText(getDate());            
     }
     //Gets todays date
     private String getDate() {
