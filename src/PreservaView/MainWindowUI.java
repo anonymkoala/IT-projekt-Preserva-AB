@@ -1,5 +1,4 @@
 package PreservaView;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.HeadlessException;
@@ -20,14 +19,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 /**
  *
  * @author Patrik & Per
@@ -36,8 +32,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     ArrayList domannamnArray = new ArrayList<>();
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listInsamling = new DefaultListModel();
-  
-    
     
     public void updateGUI() {
         JlistDomanNamn.setModel(listModel);  
@@ -582,15 +576,14 @@ public class MainWindowUI extends javax.swing.JFrame {
         try {    
           //Anropa metod för att lägga till case
             if (insamling.addInsamling().equals("success")){
-                JOptionPane.showMessageDialog(this, "New insamling added to db!");                
-                dispose();
+            JOptionPane.showMessageDialog(this, "New insamling added to db!");                
+                //dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
         } catch (SQLException | HeadlessException ex) {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
-        
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
 
      //Sets insamlingAttribute based on inputs made in register insamling-tab. 
@@ -648,7 +641,7 @@ public class MainWindowUI extends javax.swing.JFrame {
           //Anropa metod för att lägga till case
             if (c.addCustomer().equals("success")){
                 JOptionPane.showMessageDialog(this, "New customer added to db!");                
-                dispose();
+                //dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new customer..");
             }
@@ -657,7 +650,97 @@ public class MainWindowUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_createNewCustomerBtnActionPerformed
-
+    private void initGUIMainFrame() {
+       Container a = this.getContentPane();
+       a.setBackground(Color.white);
+       setTableAttributes();
+       JTabbedPane tabp = new JTabbedPane();
+       tabp.setBackground(Color.red);
+       
+       
+    }
+    private void initGUIregInsamling() {
+      txtDate.setText(getDate());
+      
+    }
+    //Gets todays date
+    private String getDate() {
+        Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
+        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
+        return formatter.format(currentDate.getTime()).toUpperCase();
+    }
+    //Hard-coded to show how the list will turn out
+    private void updateGUI(InsamlingEntity insamling) {
+        listInsamling.addElement(insamling.toString());
+        int data0 = 124;
+        String data1 = insamling.getKundnamn();
+        String data2 = insamling.getStartDatum();
+        String data3 = insamling.getStatus();
+        String data4 = "www.preserva.se";
+        String data5 = insamling.getKommentar();
+        String data6 = "länk";
+        String data7 = "länk";
+        String data8 = "länk";
+        String data9 = "länk";
+        
+        Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(row);
+    }
+    //Sets attributes, (width, color) to the jTable
+    private void setTableAttributes() {
+     jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+     jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+     jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
+     jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
+     jTable1.getColumnModel().getColumn(4).setPreferredWidth(22);
+     jTable1.getColumnModel().getColumn(5).setPreferredWidth(36);
+     jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
+     jTable1.getColumnModel().getColumn(7).setPreferredWidth(40);
+     jTable1.getColumnModel().getColumn(8).setPreferredWidth(40);
+     Color green = new Color(148,176,35);
+     jTable1.setOpaque(true);
+     jTable1.setFillsViewportHeight(true);
+     jTable1.setBackground(Color.white);
+     JTableHeader header = jTable1.getTableHeader();
+     header.setBackground(green);
+     jScrollPane4.setBackground(Color.white);
+     justForDemoPurpose();
+    }
+    private void clearInputs() {
+    
+        
+    }
+    private void justForDemoPurpose() {
+        int data0 = 123;
+        String data1 = "Preserva";
+        String data2 = "26/4/2017";
+        String data3 = "Ej startad";
+        String data4 = "www.preserva.se";
+        String data5 = "Ring Ole innan insamling påbörjar";
+        String data6 = "länk";
+        String data7 = "länk";
+        String data8 = "länk";
+        String data9 = "Starta insamling";
+        
+        Object[] row1 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(row1);
+        
+        data0 = 122;
+        data1 = "Regeringenskansliet";
+        data2 = "28/4/2017";
+        data3 = "Pågår";
+        data4 = "www.regeringen.se";
+        data5 = "Ingen kommentar..";
+        data6 = "länk";
+        data7 = "länk";
+        data8 = "länk";
+        data9 = "länk";
+        
+        Object[] row2 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
+        model.addRow(row2);
+    }
     /**
      * @param args the command line arguments
      */
@@ -751,99 +834,4 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtInsamlingsdoman;
     // End of variables declaration//GEN-END:variables
 
-    private void initGUIMainFrame() {
-       Container a = this.getContentPane();
-       a.setBackground(Color.white);
-       setTableAttributes();
-       JTabbedPane tabp = new JTabbedPane();
-       tabp.setBackground(Color.red);
-       
-       
     }
-    private void initGUIregInsamling() {
-      txtDate.setText(getDate());
-      
-    }
-    //Gets todays date
-    private String getDate() {
-        Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
-        SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
-        return formatter.format(currentDate.getTime()).toUpperCase();
-    }
-   
-    //Hard-coded to show how the list will turn out
-    private void updateGUI(InsamlingEntity insamling) {
-        listInsamling.addElement(insamling.toString());
-        int data0 = 124;
-        String data1 = insamling.getKundnamn();
-        String data2 = insamling.getStartDatum();
-        String data3 = insamling.getStatus();
-        String data4 = "www.preserva.se";
-        String data5 = insamling.getKommentar();
-        String data6 = "länk";
-        String data7 = "länk";
-        String data8 = "länk";
-        String data9 = "länk";
-        
-        Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row);
-    }
-    //Sets attributes, (width, color) to the jTable
-    private void setTableAttributes() {
-     jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-     jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
-     jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
-     jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
-     jTable1.getColumnModel().getColumn(4).setPreferredWidth(22);
-     jTable1.getColumnModel().getColumn(5).setPreferredWidth(36);
-     jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
-     jTable1.getColumnModel().getColumn(7).setPreferredWidth(40);
-     jTable1.getColumnModel().getColumn(8).setPreferredWidth(40);
-     Color green = new Color(148,176,35);
-     jTable1.setOpaque(true);
-     jTable1.setFillsViewportHeight(true);
-     jTable1.setBackground(Color.white);
-     JTableHeader header = jTable1.getTableHeader();
-     header.setBackground(green);
-     jScrollPane4.setBackground(Color.white);
-     justForDemoPurpose();
-    }
-
-    private void clearInputs() {
-    
-        
-    }
-
-    private void justForDemoPurpose() {
-        int data0 = 123;
-        String data1 = "Preserva";
-        String data2 = "26/4/2017";
-        String data3 = "Ej startad";
-        String data4 = "www.preserva.se";
-        String data5 = "Ring Ole innan insamling påbörjar";
-        String data6 = "länk";
-        String data7 = "länk";
-        String data8 = "länk";
-        String data9 = "Starta insamling";
-        
-        Object[] row1 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row1);
-        
-        data0 = 122;
-        data1 = "Regeringenskansliet";
-        data2 = "28/4/2017";
-        data3 = "Pågår";
-        data4 = "www.regeringen.se";
-        data5 = "Ingen kommentar..";
-        data6 = "länk";
-        data7 = "länk";
-        data8 = "länk";
-        data9 = "länk";
-        
-        Object[] row2 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        model.addRow(row2);
-    }
-    }
-
