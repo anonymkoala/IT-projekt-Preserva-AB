@@ -227,7 +227,7 @@ public class MainWindowUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Insamlingsnummer", "Kundnamn", "Startdatum", "Domän", "Status", "Kommentar", "URL", "", ""
+                "Insamlingsnummer", "Kundnamn", "Startdatum", "Domän", "Status", "Kommentar", "URL", "Rapport", "Starta insamling"
             }
         ));
         jTable1.setToolTipText("");
