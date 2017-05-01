@@ -56,13 +56,16 @@ public class CustomerEntity
                 //Skapar ett nytt objekt och fyller i variablerna
                 CustomerEntity c = new CustomerEntity();
                 c.setCustomerNR(rs.getInt("kundID"));
+                
             }        
+            
             //Kör SQL-uttrycket
             //stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
             
             return this.customerNr;
         }
+        
         //Fångar fel:
         catch (ClassNotFoundException | SQLException ex) {
             throw new SQLException("Problem with db:" + ex.getMessage());

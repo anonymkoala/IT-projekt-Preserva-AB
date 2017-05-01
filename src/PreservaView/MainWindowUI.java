@@ -36,25 +36,34 @@ public class MainWindowUI extends javax.swing.JFrame {
     ArrayList domannamnArray = new ArrayList<>();
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listInsamling = new DefaultListModel();
-    
-    public void updateGUI() {
-        JlistDomanNamn.setModel(listModel);  
-        listModel.clear();
-        for(int i = 0; i < domannamnArray.size(); i++){
-            listModel.addElement(domannamnArray.get(i));
-            }
-        
-    }
+    DefaultTableModel tableModel = new DefaultTableModel();
+    InsamlingEntity insamling = new InsamlingEntity();
     /**
      * Creates new form MainWindow
      */
-    public MainWindowUI(){
+    public MainWindowUI() throws SQLException{
         //Auto-generated code
         initComponents();
         //Sets background and table-attributes
         initGUIMainFrame();
         //Sets predefined values in insamling-tab
-        initGUIregInsamling();                
+        initGUIregInsamling();    
+        //Gets data from DB to JTable
+        //showTable();
+    }
+    private void initGUIMainFrame() {
+        try {
+            Container a = this.getContentPane();
+            a.setBackground(Color.white);
+            setTableAttributes();
+            JTabbedPane tabp = new JTabbedPane();
+            tabp.setBackground(Color.red);
+            updateNameCmb();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -563,9 +572,25 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void updateNameCmb() throws SQLException
-    {
+    private void initGUIregInsamling(){
+      txtDate.setText(getDate());   
+      justForDemoPurpose();
+    }
+    /*private void initJTable() throws SQLException{
+        try {    
+          //Anropa metod för att lägga till case
+            if (insamling.updateJTable().equals("success")){
+                JOptionPane.showMessageDialog(this, "Påbörjar initJtable");
+                 
+            }else{
+                JOptionPane.showMessageDialog(this, "Could not create new customer..");
+            }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }    }
+        
+        */
+        public void updateNameCmb() throws SQLException{
         String sRet = "failure";
         Connection cn = null;
         cmbKundnamn.removeAllItems();
@@ -605,17 +630,16 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKundnamnActionPerformed
 //Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
-        InsamlingEntity insamling = new InsamlingEntity();
+        
         setInsamlingAttribute(insamling);
-        updateGUI(insamling);
+        //updateGUI(insamling);
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
-        //NOT YET IMPLEMENTED, MEANT TO CLEAR INPUTS
-        //clearInputs();
         //Connect to database and add the new customer.
         try {    
           //Anropa metod för att lägga till case
             if (insamling.addInsamling().equals("success")){
-            JOptionPane.showMessageDialog(this, "New insamling added to db!"); 
+            clearInsInputs();
+            updateGUI(insamling);
             clearInsInputs();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
@@ -624,6 +648,16 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
+
+   
+    
+    public void initJlistDoman() {
+        JlistDomanNamn.setModel(listModel);  
+        listModel.clear();
+        for(int i = 0; i < domannamnArray.size(); i++){
+            listModel.addElement(domannamnArray.get(i));
+            }
+    }
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
@@ -639,7 +673,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         String domanNamn = txtInsamlingsdoman.getText();
         if(domanNamn != null){
             domannamnArray.add(domanNamn);
-            updateGUI();
+            initJlistDoman();
+            
         }else if (domanNamn == null){
             JOptionPane.showMessageDialog(rootPane, "Felaktigt domännamn, vänligen skriv i formen www.example.com");
         }
@@ -684,25 +719,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         } catch (SQLException | HeadlessException ex) {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
-
+        
     }//GEN-LAST:event_createNewCustomerBtnActionPerformed
-    private void initGUIMainFrame() {
-        try {
-            Container a = this.getContentPane();
-            a.setBackground(Color.white);
-            setTableAttributes();
-            JTabbedPane tabp = new JTabbedPane();
-            tabp.setBackground(Color.red);
-            updateNameCmb();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-       
-    }
-    private void initGUIregInsamling(){
-      txtDate.setText(getDate());            
-    }
     //Gets todays date
     private String getDate() {
         Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
@@ -711,6 +729,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }
     //Hard-coded to show how the list will turn out
     private void updateGUI(InsamlingEntity insamling) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         listInsamling.addElement(insamling.toString());
         int data0 = 124;
         String data1 = insamling.getKundnamn();
@@ -724,8 +743,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         String data9 = "länk";
         
         Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row);
+        
+        model.insertRow(0, row);
     }
     //Sets attributes, (width, color) to the jTable
     private void setTableAttributes() {
@@ -745,7 +764,6 @@ public class MainWindowUI extends javax.swing.JFrame {
      JTableHeader header = jTable1.getTableHeader();
      header.setBackground(green);
      jScrollPane4.setBackground(Color.white);
-     justForDemoPurpose();
     }
     private void clearCustInputs() {
     customerNameTxtField.setText("");
@@ -824,7 +842,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindowUI().setVisible(true);
+                try {
+                    new MainWindowUI().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -887,4 +909,23 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtInsamlingsdoman;
     // End of variables declaration//GEN-END:variables
 
+    private void showTable() {
+        try{
+         insamling.res  = insamling.stat.executeQuery("Select * from insmling");
+         while (insamling.res.next()){
+             String lopNr = insamling.res.getString(1);
+             String kundNamn = insamling.res.getString(2);
+             String startDat = insamling.res.getString(3);
+             String doman = insamling.res.getString(4);
+             String status = insamling.res.getString(5);
+             String kommentar = insamling.res.getString(6);
+             String url = insamling.res.getString(7);
+             Object[] content = {lopNr, kundNamn, startDat, doman, status, kommentar, url};
+             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+             model.addRow(content);
+         }
+        }catch (Exception e){
+            
+        }
+    }
     }

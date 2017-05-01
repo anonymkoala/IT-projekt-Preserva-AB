@@ -9,7 +9,9 @@ import PreservaView.MainWindowUI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -27,6 +29,9 @@ public class InsamlingEntity {
     private String insamlingsRapport;
     private String kundnamn;
     private int insamlingsNr;
+    public ResultSet res;
+    public Statement stat;
+    public Connection con;
     
     public InsamlingEntity(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
      this.kundnamn = kundnamn;
@@ -35,8 +40,8 @@ public class InsamlingEntity {
      this.Kommentar = kommentar;
     }
     
-    public InsamlingEntity() {
-   
+    public InsamlingEntity(){
+
     }
 public String addInsamling() throws SQLException 
     {        
@@ -206,5 +211,25 @@ public String addInsamling() throws SQLException
     public void setInsamlingsNr(int insamlingsNr) {
         this.insamlingsNr = insamlingsNr;
     }
-    
+
+   public void connectJTable() throws SQLException {
+       con = null;
+         try{
+             Class.forName("com.mysql.jdbc.Driver");            
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (con == null){
+                throw new SQLException("No connection to target database!");
+            }         
+            
+            stat = (Statement) con.createStatement();
+            JOptionPane.showMessageDialog(null, "");
+         }
+             
+         //Fångar fel:
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }
+        
+        } 
+         
 }
