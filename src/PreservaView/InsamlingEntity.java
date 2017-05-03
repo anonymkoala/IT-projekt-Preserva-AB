@@ -28,6 +28,7 @@ public class InsamlingEntity {
     private String insamlingsURL;
     private String insamlingsRapport;
     private String kundnamn;
+    private String startaInsamlingURL;
     private int insamlingsNr;
     public ResultSet res;
     public Statement stat;
@@ -69,7 +70,7 @@ public String addInsamling() throws SQLException
             stmt.setString(3, getStatus());
             stmt.setString(7, getKommentar());
             stmt.setString(4, getInsamlingsprofil());
-            stmt.setString(5, getInsamlingsRapport());
+            stmt.setString(5, getStartaInsamlingURL());
             stmt.setString(6, getInsamlingsRapport());
             stmt.setInt(8, 2);
                        
@@ -236,6 +237,7 @@ public String addInsamling() throws SQLException
    public ArrayList<InsamlingEntity> getInsamling() throws SQLException
     {
         //Samma uppkopplingskod som i övriga metoder
+        String sret = "failure";
         Connection cn = null;       
         try{            
             Class.forName("com.mysql.jdbc.Driver");            
@@ -245,7 +247,7 @@ public String addInsamling() throws SQLException
                 throw new SQLException("No connection to target database!");
             }
             PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
-                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL"
+                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
                     + "kommentar,kundID FROM insamling ");          
             //Resultatet från SQL-satsen sparas i ett ResultSet
             ResultSet rs = stmt.executeQuery();
@@ -255,9 +257,14 @@ public String addInsamling() throws SQLException
                 //Skapar ett nytt objekt och fyller i variablerna
                 InsamlingEntity in = new InsamlingEntity();
                 in.setInsamlingsNr(rs.getInt("InsamlingsID"));
+                in.setKundnamn("kundID");
                 in.setStartDatum(rs.getString("startdatum"));
                 in.setStatus(rs.getString("status"));
-                in.setInsamlingsURL(rs.getString("insamlingsprofilURL"));
+                in.setKommentar("kommentar");
+                in.setInsamlingsURL(rs.getString("rapportURL"));
+                in.setInsamlingsRapport("rapportURL");
+                in.setStartaInsamlingURL("startaInsamlingURL");
+                
                 //Fortsätt fylla på här Per, tills alla variabler är med.
                 
                 //Sedan läggs objektet till i ArrayListan caseList.
@@ -272,6 +279,20 @@ public String addInsamling() throws SQLException
             if (cn!=null) 
                 cn.close();
         }        
+    }
+
+    /**
+     * @return the startaInsamlingURL
+     */
+    public String getStartaInsamlingURL() {
+        return startaInsamlingURL;
+    }
+
+    /**
+     * @param startaInsamlingURL the startaInsamlingURL to set
+     */
+    public void setStartaInsamlingURL(String startaInsamlingURL) {
+        this.startaInsamlingURL = startaInsamlingURL;
     }
          
 }

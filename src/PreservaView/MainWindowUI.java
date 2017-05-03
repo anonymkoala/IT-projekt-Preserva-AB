@@ -241,7 +241,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -380,7 +380,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(378, 378, 378)
                         .addComponent(btnCreateInsamling, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,7 +423,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGap(114, 114, 114)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCreateInsamling)
                 .addGap(42, 42, 42))
         );
@@ -432,7 +432,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1055, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,7 +465,7 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jLabel9.setText("Telefon:");
 
-        jLabel10.setText("Namn:");
+        jLabel10.setText("Kundnamn:");
 
         jLabel2.setText("Gata:");
 
@@ -496,7 +496,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addComponent(createNewCustomerBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)))
-                .addContainerGap(611, Short.MAX_VALUE))
+                .addContainerGap(657, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,7 +542,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera kund", jPanel5);
@@ -558,8 +558,8 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1076, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,14 +576,10 @@ public class MainWindowUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void initGUIregInsamling(){
       txtDate.setText(getDate());   
-      //justForDemoPurpose();
-      //Avkommentera initInsamlingTable() efter att 
-      //initInsamlingTable()
-      
+      initInsamlingTable();
     }
-    
-    public void initInsamlingTable() //initierar tabellen i MainWindowUI
-    {            
+    //initierar tabellen i MainWindowUI
+    public void initInsamlingTable() {            
       DefaultTableModel model = (DefaultTableModel) jTable1.getModel();  
       
       InsamlingEntity i = new InsamlingEntity();
@@ -609,22 +605,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }        
     }
-    
-    /*private void initJTable() throws SQLException{
-        try {    
-          //Anropa metod för att lägga till case
-            if (insamling.updateJTable().equals("success")){
-                JOptionPane.showMessageDialog(this, "Påbörjar initJtable");
-                 
-            }else{
-                JOptionPane.showMessageDialog(this, "Could not create new customer..");
-            }
-        } catch (HeadlessException ex) {
-            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
-        }    }
-        
-        */
-        public void updateNameCmb() throws SQLException{
+    public void updateNameCmb() throws SQLException{
         String sRet = "failure";
         Connection cn = null;
         cmbKundnamn.removeAllItems();
@@ -655,7 +636,6 @@ public class MainWindowUI extends javax.swing.JFrame {
                 cn.close();
         }
     }
-    
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
@@ -673,8 +653,7 @@ public class MainWindowUI extends javax.swing.JFrame {
           //Anropa metod för att lägga till case
             if (insamling.addInsamling().equals("success")){
             clearInsInputs();
-            updateGUI(insamling);
-            clearInsInputs();
+            initInsamlingTable();
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
@@ -682,9 +661,6 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
-
-   
-    
     public void initJlistDoman() {
         JlistDomanNamn.setModel(listModel);  
         listModel.clear();
@@ -700,6 +676,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
         insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
         insamling.setKommentar(txtAreaKommentar.getText());
+        insamling.setStartaInsamlingURL("Autogenerated");
         
     }
     private void lblAddDomanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAddDomanMouseClicked
@@ -761,25 +738,6 @@ public class MainWindowUI extends javax.swing.JFrame {
         SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //formatera om
         return formatter.format(currentDate.getTime()).toUpperCase();
     }
-    //Hard-coded to show how the list will turn out
-    private void updateGUI(InsamlingEntity insamling) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        listInsamling.addElement(insamling.toString());
-        int data0 = 124;
-        String data1 = insamling.getKundnamn();
-        String data2 = insamling.getStartDatum();
-        String data3 = insamling.getStatus();
-        String data4 = "www.preserva.se";
-        String data5 = insamling.getKommentar();
-        String data6 = "länk";
-        String data7 = "länk";
-        String data8 = "länk";
-        String data9 = "länk";
-        
-        Object[] row = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        
-        model.insertRow(0, row);
-    }
     //Sets attributes, (width, color) to the jTable
     private void setTableAttributes() {
      jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
@@ -815,36 +773,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         cmbInsamlingsprofil.setSelectedIndex(0);
         cmbBoxStatus.setSelectedIndex(0);
         txtAreaKommentar.setText("");
-    }
-    private void justForDemoPurpose() {
-        int data0 = 123;
-        String data1 = "Preserva";
-        String data2 = "26/4/2017";
-        String data3 = "Ej startad";
-        String data4 = "www.preserva.se";
-        String data5 = "Ring Ole innan insamling påbörjar";
-        String data6 = "länk";
-        String data7 = "länk";
-        String data8 = "länk";
-        String data9 = "Starta insamling";
-        
-        Object[] row1 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row1);
-        
-        data0 = 122;
-        data1 = "Regeringenskansliet";
-        data2 = "28/4/2017";
-        data3 = "Pågår";
-        data4 = "www.regeringen.se";
-        data5 = "Ingen kommentar..";
-        data6 = "länk";
-        data7 = "länk";
-        data8 = "länk";
-        data9 = "länk";
-        
-        Object[] row2 = {data0, data1, data2, data4, data3, data5, data6, data7, data8, data9};
-        model.addRow(row2);
+        txtInsamlingsdoman.setText("");
     }
     /**
      * @param args the command line arguments
@@ -943,23 +872,4 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField txtInsamlingsdoman;
     // End of variables declaration//GEN-END:variables
 
-    private void showTable() {
-        try{
-         insamling.res  = insamling.stat.executeQuery("Select * from insmling");
-         while (insamling.res.next()){
-             String lopNr = insamling.res.getString(1);
-             String kundNamn = insamling.res.getString(2);
-             String startDat = insamling.res.getString(3);
-             String doman = insamling.res.getString(4);
-             String status = insamling.res.getString(5);
-             String kommentar = insamling.res.getString(6);
-             String url = insamling.res.getString(7);
-             Object[] content = {lopNr, kundNamn, startDat, doman, status, kommentar, url};
-             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-             model.addRow(content);
-         }
-        }catch (Exception e){
-            
-        }
-    }
-    }
+}
