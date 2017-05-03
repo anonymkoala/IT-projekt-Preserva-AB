@@ -32,6 +32,7 @@ public class InsamlingEntity {
     public ResultSet res;
     public Statement stat;
     public Connection con;
+    private static ArrayList<InsamlingEntity> insamlingList = new ArrayList<>();
     
     public InsamlingEntity(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
      this.kundnamn = kundnamn;
@@ -231,5 +232,46 @@ public String addInsamling() throws SQLException
         }
         
         } 
+   
+   public ArrayList<InsamlingEntity> getInsamling() throws SQLException
+    {
+        //Samma uppkopplingskod som i övriga metoder
+        Connection cn = null;       
+        try{            
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
+            
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
+                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL"
+                    + "kommentar,kundID FROM insamling ");          
+            //Resultatet från SQL-satsen sparas i ett ResultSet
+            ResultSet rs = stmt.executeQuery();
+            //Listan töms och fylls sedan på med ResultSet
+            insamlingList.clear();            
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity in = new InsamlingEntity();
+                in.setInsamlingsNr(rs.getInt("InsamlingsID"));
+                in.setStartDatum(rs.getString("startdatum"));
+                in.setStatus(rs.getString("status"));
+                in.setInsamlingsURL(rs.getString("insamlingsprofilURL"));
+                //Fortsätt fylla på här Per, tills alla variabler är med.
+                
+                //Sedan läggs objektet till i ArrayListan caseList.
+                insamlingList.add(in);                
+            }
+            
+            return insamlingList;
+            
+        }catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }finally{
+            if (cn!=null) 
+                cn.close();
+        }        
+    }
          
 }

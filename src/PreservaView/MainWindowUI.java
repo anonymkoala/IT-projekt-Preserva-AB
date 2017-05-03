@@ -576,8 +576,40 @@ public class MainWindowUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void initGUIregInsamling(){
       txtDate.setText(getDate());   
-      justForDemoPurpose();
+      //justForDemoPurpose();
+      //Avkommentera initInsamlingTable() efter att 
+      //initInsamlingTable()
+      
     }
+    
+    public void initInsamlingTable() //initierar tabellen i MainWindowUI
+    {            
+      DefaultTableModel model = (DefaultTableModel) jTable1.getModel();  
+      
+      InsamlingEntity i = new InsamlingEntity();
+      
+      ArrayList<InsamlingEntity> insamlingList = new ArrayList<>();
+      
+        try 
+        {
+            //Hämta lista (Arraylist) med Case från databasen
+            insamlingList = i.getInsamling();
+            //Töm tabellen först
+            model.setRowCount(0);
+            //Loopa igenom listan (Arraylist) med Case 
+            //och lägg till i tabellen för gränssnittet
+            for (InsamlingEntity ins : insamlingList){
+            model.addRow(new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
+            ins.getDoman(), ins.getStatus(), ins.getKommentar(), ins.getInsamlingsURL(), ins.getInsamlingsRapport()});            
+            }
+        }
+        
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }        
+    }
+    
     /*private void initJTable() throws SQLException{
         try {    
           //Anropa metod för att lägga till case
