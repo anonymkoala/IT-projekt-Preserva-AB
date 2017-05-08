@@ -264,6 +264,50 @@ public String addInsamling() throws SQLException
                 in.setInsamlingsURL(rs.getString("rapportURL"));
                 in.setInsamlingsRapport("rapportURL");
                 in.setStartaInsamlingURL("startaInsamlingURL");
+                //Sedan läggs objektet till i ArrayListan caseList.
+                insamlingList.add(in);                
+            }
+            
+            return insamlingList;
+            
+        }catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }finally{
+            if (cn!=null) 
+                cn.close();
+        }        
+    }
+public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQLException
+    {
+        //Samma uppkopplingskod som i övriga metoder
+        String sret = "failure";
+        Connection cn = null;       
+        try{            
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
+            
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
+                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
+                    + "kommentar,kundID FROM insamling " + "WHERE status = \n'" + status + "\';");          
+            //Resultatet från SQL-satsen sparas i ett ResultSet
+            System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            //Listan töms och fylls sedan på med ResultSet
+            insamlingList.clear();            
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity in = new InsamlingEntity();
+                in.setInsamlingsNr(rs.getInt("InsamlingsID"));
+                in.setKundnamn("kundID");
+                in.setStartDatum(rs.getString("startdatum"));
+                in.setStatus(rs.getString("status"));
+                in.setKommentar("kommentar");
+                in.setInsamlingsURL(rs.getString("rapportURL"));
+                in.setInsamlingsRapport("rapportURL");
+                in.setStartaInsamlingURL("startaInsamlingURL");
                 
                 //Fortsätt fylla på här Per, tills alla variabler är med.
                 
@@ -280,7 +324,6 @@ public String addInsamling() throws SQLException
                 cn.close();
         }        
     }
-
     /**
      * @return the startaInsamlingURL
      */

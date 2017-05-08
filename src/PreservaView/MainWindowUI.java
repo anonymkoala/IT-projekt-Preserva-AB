@@ -20,9 +20,11 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.TableRowSorter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,8 +38,8 @@ public class MainWindowUI extends javax.swing.JFrame {
     ArrayList domannamnArray = new ArrayList<>();
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listInsamling = new DefaultListModel();
-    DefaultTableModel tableModel = new DefaultTableModel();
     InsamlingEntity insamling = new InsamlingEntity();
+    private String status = "";
     /**
      * Creates new form MainWindow
      */
@@ -59,6 +61,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             JTabbedPane tabp = new JTabbedPane();
             tabp.setBackground(Color.red);
             updateNameCmb();
+            initInsamlingTable();
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -81,9 +84,9 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnSortPagaende = new javax.swing.JButton();
+        btnSortEjStartade = new javax.swing.JButton();
+        btnSortLevererade = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -155,20 +158,35 @@ public class MainWindowUI extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton7.setForeground(new java.awt.Color(51, 51, 51));
         jButton7.setText("Samtliga");
-
-        jButton8.setBackground(new java.awt.Color(148, 176, 35));
-        jButton8.setText("Pågående");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(148, 176, 35));
-        jButton9.setText("Ej startade");
+        btnSortPagaende.setBackground(new java.awt.Color(148, 176, 35));
+        btnSortPagaende.setText("Pågående");
+        btnSortPagaende.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortPagaendeActionPerformed(evt);
+            }
+        });
 
-        jButton10.setBackground(new java.awt.Color(148, 176, 35));
-        jButton10.setText("Levererade");
+        btnSortEjStartade.setBackground(new java.awt.Color(148, 176, 35));
+        btnSortEjStartade.setText("Ej startade");
+        btnSortEjStartade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortEjStartadeActionPerformed(evt);
+            }
+        });
+
+        btnSortLevererade.setBackground(new java.awt.Color(148, 176, 35));
+        btnSortLevererade.setText("Levererade");
+        btnSortLevererade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortLevereradeActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("90");
 
@@ -201,7 +219,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSortPagaende, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -209,14 +227,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                            .addComponent(btnSortLevererade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -230,15 +248,15 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
+                    .addComponent(btnSortPagaende)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
+                    .addComponent(btnSortEjStartade)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
+                    .addComponent(btnSortLevererade)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
@@ -455,14 +473,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                     .addGap(114, 114, 114)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1055, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,7 +597,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 45, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrera kund", jPanel5);
@@ -613,7 +631,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void initGUIregInsamling(){
       txtDate.setText(getDate());   
-      initInsamlingTable();
+      
     }
     //initierar tabellen i MainWindowUI
     public void initInsamlingTable() {            
@@ -641,6 +659,34 @@ public class MainWindowUI extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }        
+    }
+        public void initSortedInsamlingTable(String status) {            
+      DefaultTableModel model = (DefaultTableModel) jTable1.getModel();  
+      
+      InsamlingEntity i = new InsamlingEntity();
+      
+      ArrayList<InsamlingEntity> insamlingList = new ArrayList<>();
+      
+        try 
+        {
+            //Hämta lista (Arraylist) med Case från databasen
+            insamlingList = i.getSpecificInsamling(status);
+            //Töm tabellen först
+            model.setRowCount(0);
+             //Loopa igenom listan (Arraylist) med Case 
+            //och lägg till i tabellen för gränssnittet
+            for (InsamlingEntity ins : insamlingList){
+            model.addRow(new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
+            ins.getDoman(), ins.getStatus(), ins.getKommentar(), ins.getInsamlingsURL(), ins.getInsamlingsRapport()});            
+            }
+            
+        }
+        
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }   
+            
     }
     public void updateNameCmb() throws SQLException{
         String sRet = "failure";
@@ -673,6 +719,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 cn.close();
         }
     }
+    
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDateActionPerformed
@@ -770,9 +817,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_createNewCustomerBtnActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnSortPagaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortPagaendeActionPerformed
+        status = "Pågår";
+        initSortedInsamlingTable(status);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnSortPagaendeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -781,6 +830,23 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        initInsamlingTable();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnSortEjStartadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortEjStartadeActionPerformed
+        status = "Ej Startad";
+        initSortedInsamlingTable(status);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSortEjStartadeActionPerformed
+
+    private void btnSortLevereradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortLevereradeActionPerformed
+        status = "Levererad";
+        initSortedInsamlingTable(status);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSortLevereradeActionPerformed
     //Gets todays date
     private String getDate() {
         Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
@@ -805,6 +871,8 @@ public class MainWindowUI extends javax.swing.JFrame {
      JTableHeader header = jTable1.getTableHeader();
      header.setBackground(green);
      jScrollPane4.setBackground(Color.white);
+     jTable1.setAutoCreateRowSorter(true);
+     
     }
     private void clearCustInputs() {
     customerNameTxtField.setText("");
@@ -866,6 +934,9 @@ public class MainWindowUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList JlistDomanNamn;
     private javax.swing.JButton btnCreateInsamling;
+    private javax.swing.JButton btnSortEjStartade;
+    private javax.swing.JButton btnSortLevererade;
+    private javax.swing.JButton btnSortPagaende;
     private javax.swing.JComboBox cmbBoxStatus;
     private javax.swing.JComboBox cmbInsamlingsprofil;
     private javax.swing.JComboBox cmbKundnamn;
@@ -877,13 +948,10 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField customerPostCodeTxtField;
     private javax.swing.JTextField customerStreetTxtField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
