@@ -293,7 +293,6 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
                     + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
                     + "kommentar,kundID FROM insamling " + "WHERE status = \n'" + status + "\';");          
             //Resultatet från SQL-satsen sparas i ett ResultSet
-            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             //Listan töms och fylls sedan på med ResultSet
             insamlingList.clear();            
