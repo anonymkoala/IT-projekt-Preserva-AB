@@ -248,7 +248,7 @@ public String addInsamling() throws SQLException
             }
             PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
                     + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
-                    + "kommentar,kundID FROM insamling ");          
+                    + "kommentar,kundID FROM insamling");          
             //Resultatet från SQL-satsen sparas i ett ResultSet
             ResultSet rs = stmt.executeQuery();
             //Listan töms och fylls sedan på med ResultSet
@@ -375,7 +375,6 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
                 //Sedan läggs objektet till i ArrayListan caseList.
                 insamlingList.add(in);                
             }
-            System.out.println(rowCount);
     }return rowCount+"";
        }catch (ClassNotFoundException | SQLException ex) {
             throw new SQLException("Problem with db:" + ex.getMessage());

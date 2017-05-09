@@ -413,7 +413,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel7" min="-2" pref="345" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="44" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -452,48 +452,46 @@
                                   <Component id="jLabel17" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cmbKundnamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="cmbBoxStatus" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="cmbInsamlingsprofil" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                                      <Component id="lblSkapaInsProfil" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="cmbBoxStatus" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="cmbInsamlingsprofil" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="txtDate" alignment="0" pref="143" max="32767" attributes="0"/>
-                                                          <Component id="txtInsamlingsdoman" alignment="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="lblAddDoman" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                                  <Component id="lblSkapaInsProfil" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="txtDate" alignment="0" pref="143" max="32767" attributes="0"/>
+                                                      <Component id="txtInsamlingsdoman" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="lblAddDoman" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="btnCreateInsamling" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="cmbKundnamn" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane2" min="-2" pref="232" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" min="-2" pref="232" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="399" max="32767" attributes="0"/>
+                              <EmptySpace pref="300" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
