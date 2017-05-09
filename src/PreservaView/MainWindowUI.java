@@ -91,8 +91,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         lblPagaende = new javax.swing.JLabel();
         lblEjStartade = new javax.swing.JLabel();
         lblLevererade = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        saveBtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -200,19 +199,11 @@ public class MainWindowUI extends javax.swing.JFrame {
         lblLevererade.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         lblLevererade.setText("60");
 
-        jButton1.setBackground(new java.awt.Color(148, 176, 35));
-        jButton1.setText("Redigera");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        saveBtn.setBackground(new java.awt.Color(148, 176, 35));
+        saveBtn.setText("Spara ändringar");
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(148, 176, 35));
-        jButton4.setText("Sök");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                saveBtnActionPerformed(evt);
             }
         });
 
@@ -236,8 +227,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addComponent(lblEjStartade))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSortLevererade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLevererade)))
@@ -262,10 +252,8 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(btnSortLevererade)
                     .addComponent(lblLevererade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addComponent(saveBtn)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jScrollPane4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(148, 176, 35), 2, true));
@@ -476,14 +464,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                     .addGap(114, 114, 114)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1055, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -760,7 +748,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
         insamling.setStartDatum(txtDate.getText());
-        insamling.setDoman(domannamnArray);
+        insamling.setDoman(txtInsamlingsdoman.getText());
         insamling.setInsamlingsprofil(cmbInsamlingsprofil.getSelectedItem().toString());
         insamling.setStatus(cmbBoxStatus.getSelectedItem().toString());
         insamling.setKommentar(txtAreaKommentar.getText());
@@ -827,13 +815,34 @@ public class MainWindowUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSortPagaendeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        //Skapar table
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        //Skapar nytt Insamlingsobjekt
+        InsamlingEntity i = new InsamlingEntity();
+        
+        //Hämtar index för raden som är vald
+        int tblindex = jTable1.getSelectedRow();
+        
+        //Hämtar Insamlingsnummer och Kommentar för vald rad
+        i.setInsamlingsNr((int)jTable1.getValueAt(tblindex, 0));
+        i.setKommentar((String)jTable1.getValueAt(tblindex, 5));
+        
+        //Uppdaterar databasen med informationen i jTable
+        try {    
+          //Anropa metod för att uppdatera Insamling
+            if (i.updateInsamling().equals("success")){
+                JOptionPane.showMessageDialog(this, "Insamling uppdaterad!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Något gick fel. Uppdatering ej genomförd.");
+            }
+        } catch (SQLException | HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
+        }
+        initInsamlingTable();
+        
+    }//GEN-LAST:event_saveBtnActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         initInsamlingTable();
@@ -951,10 +960,8 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField customerPhoneNumberTxtField;
     private javax.swing.JTextField customerPostCodeTxtField;
     private javax.swing.JTextField customerStreetTxtField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -991,6 +998,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblPagaende;
     private javax.swing.JLabel lblSamtliga;
     private javax.swing.JLabel lblSkapaInsProfil;
+    private javax.swing.JButton saveBtn;
     private javax.swing.JTextArea txtAreaKommentar;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtInsamlingsdoman;

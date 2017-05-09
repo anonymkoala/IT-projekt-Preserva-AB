@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class InsamlingEntity {
     private String startDatum;
     private String Kommentar;
-    private ArrayList doman = new ArrayList<String>();
+    private String doman;
     private String status;
     private String insamlingsprofil;
     private String insamlingsURL;
@@ -175,14 +175,14 @@ public String addInsamling() throws SQLException
     /**
      * @return the doman
      */
-    public ArrayList getDoman() {
+    public String getDoman() {
         return doman;
     }
 
     /**
      * @param doman the doman to set
      */
-    public void setDoman(ArrayList doman) {
+    public void setDoman(String doman) {
         this.doman = doman;
     }
 
@@ -432,5 +432,37 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
                 cn.close();
                
 }
+    }
+    
+    public String updateInsamling() throws SQLException
+    {
+        //Samma uppkopplingskod som i övriga metoder
+        String sRet = "failure";
+        
+        Connection cn = null;       
+        try{            
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
+            
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            PreparedStatement stmt = cn.prepareStatement("UPDATE insamling SET kommentar = ? WHERE insamlingsID = ?");
+            
+            stmt.setString(1, getKommentar());
+            stmt.setInt(2, getInsamlingsNr());
+            
+            int i = stmt.executeUpdate();            
+            if (i > 0) sRet = "success";
+            return sRet;
+        }
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }finally{
+            if (cn!=null) 
+                cn.close();
+        }
+            
+            
     }
 }
