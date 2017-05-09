@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class InsamlingEntity {
     private String startDatum;
-    private String Kommentar;
+    private String kommentar;
     private String doman;
     private String status;
     private String insamlingsprofil;
@@ -34,13 +34,6 @@ public class InsamlingEntity {
     public Statement stat;
     public Connection con;
     private static ArrayList<InsamlingEntity> insamlingList = new ArrayList<>();
-    
-    public InsamlingEntity(String kundnamn, String startDatum, String insamlingsprofil, String kommentar) {
-     this.kundnamn = kundnamn;
-     this.startDatum = startDatum;
-     this.insamlingsprofil = insamlingsprofil;
-     this.Kommentar = kommentar;
-    }
     
     public InsamlingEntity(){
 
@@ -78,6 +71,7 @@ public String addInsamling() throws SQLException
             int i = stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
             if (i > 0) sRet = "success";
+            System.out.println("Test!");
             return sRet; //returnera status från SQL-exekvering (failure/success)
         }
         //Fångar fel:
@@ -106,14 +100,14 @@ public String addInsamling() throws SQLException
      * @return the Kommentar
      */
     public String getKommentar() {
-        return Kommentar;
+        return kommentar;
     }
 
     /**
      * @param Kommentar the Kommentar to set
      */
     public void setKommentar(String Kommentar) {
-        this.Kommentar = Kommentar;
+        this.kommentar = Kommentar;
     }
 
     /**
@@ -257,14 +251,11 @@ public String addInsamling() throws SQLException
                 //Skapar ett nytt objekt och fyller i variablerna
                 InsamlingEntity in = new InsamlingEntity();
                 in.setInsamlingsNr(rs.getInt("InsamlingsID"));
-                in.setKundnamn("kundID");
+                in.setKundnamn(rs.getString("kundID"));
                 in.setStartDatum(rs.getString("startdatum"));
                 in.setStatus(rs.getString("status"));
-                in.setKommentar("kommentar");
+                in.setKommentar(rs.getString("kommentar"));
                 in.setInsamlingsURL(rs.getString("rapportURL"));
-                in.setInsamlingsRapport("rapportURL");
-                in.setStartaInsamlingURL("startaInsamlingURL");
-                //Sedan läggs objektet till i ArrayListan caseList.
                 insamlingList.add(in);                
             }
             

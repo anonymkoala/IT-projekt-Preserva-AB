@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.table.TableRowSorter;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -49,10 +50,10 @@ public class MainWindowUI extends javax.swing.JFrame {
         //Sets background and table-attributes
         initGUIMainFrame();
         //Sets predefined values in insamling-tab
-        initGUIregInsamling();    
-        //Gets data from DB to JTable
-        //showTable();
+        initGUIregInsamling();  
+        mouseClickListener();
     }
+    //Initializes the GUI Main frame and sets colors etc, 
     private void initGUIMainFrame() {
         try {
             Container a = this.getContentPane();
@@ -212,26 +213,23 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSamtliga))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSortPagaende, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPagaende))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblEjStartade))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSortLevererade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblLevererade)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSamtliga))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(btnSortPagaende, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPagaende))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEjStartade))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnSortLevererade, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLevererade))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,8 +278,8 @@ public class MainWindowUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -418,7 +416,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,14 +462,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                     .addGap(114, 114, 114)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1071, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,7 +538,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                             .addComponent(createNewCustomerBtn)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3))))
-                .addContainerGap(692, Short.MAX_VALUE))
+                .addContainerGap(679, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -604,8 +602,8 @@ public class MainWindowUI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1076, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1098, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,11 +636,12 @@ public class MainWindowUI extends javax.swing.JFrame {
             insamlingList = i.getInsamling();
             //Töm tabellen först
             model.setRowCount(0);
+            System.out.println("Kommentar: " + i.getKommentar());
             //Loopa igenom listan (Arraylist) med Case 
             //och lägg till i tabellen för gränssnittet
             for (InsamlingEntity ins : insamlingList){
             model.addRow(new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
-            ins.getDoman(), ins.getStatus(), ins.getKommentar(), ins.getInsamlingsURL(), ins.getInsamlingsRapport()});            
+            ins.getDoman(), ins.getStatus(), ins.getKommentar(), justForDemoPurpose(), justForDemoPurpose(), justForDemoPurpose()});            
             }
         }
         
@@ -668,7 +667,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             //och lägg till i tabellen för gränssnittet
             for (InsamlingEntity ins : insamlingList){
             model.addRow(new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
-            ins.getDoman(), ins.getStatus(), ins.getKommentar(), ins.getInsamlingsURL(), ins.getInsamlingsRapport()});            
+            ins.getDoman(), ins.getStatus(), ins.getKommentar(), justForDemoPurpose(), justForDemoPurpose(), justForDemoPurpose()});            
             }
             
         }
@@ -721,7 +720,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
         
         setInsamlingAttribute(insamling);
-        //updateGUI(insamling);
         JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
         //Connect to database and add the new customer.
         try {    
@@ -868,7 +866,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }
     //Sets attributes, (width, color) to the jTable
     private void setTableAttributes() {
-     jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
+     jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
      jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
      jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
      jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
@@ -876,7 +874,7 @@ public class MainWindowUI extends javax.swing.JFrame {
      jTable1.getColumnModel().getColumn(5).setPreferredWidth(36);
      jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
      jTable1.getColumnModel().getColumn(7).setPreferredWidth(40);
-     jTable1.getColumnModel().getColumn(8).setPreferredWidth(40);
+     jTable1.getColumnModel().getColumn(8).setPreferredWidth(60);
      Color green = new Color(148,176,35);
      jTable1.setOpaque(true);
      jTable1.setFillsViewportHeight(true);
@@ -1014,6 +1012,27 @@ public class MainWindowUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private Object justForDemoPurpose() {
+       String test ="<html><u>Länk</u>";
+       return test;
+    }
+
+    private void mouseClickListener() {
+    jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int row = jTable1.rowAtPoint(evt.getPoint());
+        int col = jTable1.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 6) {
+            JOptionPane.showMessageDialog(rootPane, "Skickar användare vidare till Heritrix");
+            
+
+        }
+    }
+});
+    
     }
 
 }
