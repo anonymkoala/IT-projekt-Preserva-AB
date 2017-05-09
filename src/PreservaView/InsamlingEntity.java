@@ -336,5 +336,102 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
     public void setStartaInsamlingURL(String startaInsamlingURL) {
         this.startaInsamlingURL = startaInsamlingURL;
     }
-         
+
+    String getInsamlingCount(String status) throws SQLException {
+        
+        //Samma uppkopplingskod som i övriga metoder
+        String sret = "failure";
+        int rowCount = 0;
+        Connection cn = null;       
+        try{            
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
+            
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
+                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
+                    + "kommentar,kundID FROM insamling " + "WHERE status = \n'" + status + "\';");          
+            //Resultatet från SQL-satsen sparas i ett ResultSet
+            ResultSet rs = stmt.executeQuery();
+            //Listan töms och fylls sedan på med ResultSet
+            insamlingList.clear();  
+            if (rs.last()){
+            rowCount = rs.getRow();
+            rs.beforeFirst();
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity in = new InsamlingEntity();
+                in.setInsamlingsNr(rs.getInt("InsamlingsID"));
+                in.setKundnamn("kundID");
+                in.setStartDatum(rs.getString("startdatum"));
+                in.setStatus(rs.getString("status"));
+                in.setKommentar("kommentar");
+                in.setInsamlingsURL(rs.getString("rapportURL"));
+                in.setInsamlingsRapport("rapportURL");
+                in.setStartaInsamlingURL("startaInsamlingURL");
+
+                //Sedan läggs objektet till i ArrayListan caseList.
+                insamlingList.add(in);                
+            }
+            System.out.println(rowCount);
+    }return rowCount+"";
+       }catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }finally{
+            if (cn!=null) 
+                cn.close();
+               
+}}
+
+    String getSamtliga(String status) throws SQLException {
+            
+        //Samma uppkopplingskod som i övriga metoder
+        String sret = "failure";
+        int rowCount = 0;
+        Connection cn = null;       
+        try{            
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
+            
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+            PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
+                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
+                    + "kommentar,kundID FROM insamling ");          
+            //Resultatet från SQL-satsen sparas i ett ResultSet
+            ResultSet rs = stmt.executeQuery();
+            //Listan töms och fylls sedan på med ResultSet
+            insamlingList.clear();  
+            if (rs.last()){
+            rowCount = rs.getRow();
+            rs.beforeFirst();
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity in = new InsamlingEntity();
+                in.setInsamlingsNr(rs.getInt("InsamlingsID"));
+                in.setKundnamn("kundID");
+                in.setStartDatum(rs.getString("startdatum"));
+                in.setStatus(rs.getString("status"));
+                in.setKommentar("kommentar");
+                in.setInsamlingsURL(rs.getString("rapportURL"));
+                in.setInsamlingsRapport("rapportURL");
+                in.setStartaInsamlingURL("startaInsamlingURL");
+                
+                //Fortsätt fylla på här Per, tills alla variabler är med.
+                
+                //Sedan läggs objektet till i ArrayListan caseList.
+                insamlingList.add(in);                
+            }
+    }return rowCount+"";
+       }catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }finally{
+            if (cn!=null) 
+                cn.close();
+               
+}
+    }
 }
