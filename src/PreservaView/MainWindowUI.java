@@ -725,8 +725,16 @@ public class MainWindowUI extends javax.swing.JFrame {
         try {    
           //Anropa metod för att lägga till case
             if (insamling.addInsamling().equals("success")){
+                DomainEntity d = new DomainEntity();
+                d.setDomain(insamling.getDoman());
+                d.setInsamlingsID(insamling.getNrOfInsamlingar());
+                d.addDomain();
+                if (d.addDomain().equals("success")){
             clearInsInputs();
             initInsamlingTable();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Could not create new domainlist entry..");
+                }
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
@@ -741,7 +749,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         for(int i = 0; i < domannamnArray.size(); i++){
             listModel.addElement(domannamnArray.get(i));
             }
-    }
+    }    
+    
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 
@@ -789,6 +798,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         c.setCity((String)customerCityTxtField.getText());
         c.setStreet((String)customerStreetTxtField.getText());
         c.setPostCode((String)customerPostCodeTxtField.getText());
+        //c.setCustomerNR(c.generateRandomCustomerNr());
         //c.setOrgNr((String)customerOrgNrTxtField.getText());
         
         //Connect to database and add the new customer.

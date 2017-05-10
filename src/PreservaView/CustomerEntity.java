@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import java.util.Random;
 
 /**
  *
@@ -76,6 +77,17 @@ public class CustomerEntity
                 cn.close();
         }
     }
+    
+    public int generateRandomCustomerNr()
+    {
+        Random randomGenerator = new Random();
+        
+        int randomNumber = randomGenerator.nextInt(10000);
+        
+        return randomNumber;
+        
+    }
+    
     
     
     

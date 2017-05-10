@@ -51,26 +51,35 @@ public String addInsamling() throws SQLException
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
-                       
+            
+            //Hämtar kundID som är kopplat till Namnet i cmbKundnamn
+            PreparedStatement stmt2 = cn.prepareStatement("SELECT kundID FROM kund WHERE namn = ?");
+            
+            stmt2.setString(1, getKundnamn());
+            ResultSet rs2 = stmt2.executeQuery();
+            int kundID2 = rs2.getInt("kundID"); 
             //SQL-statement som skickas till databasen:
-            PreparedStatement stmt = cn.prepareStatement("INSERT INTO insamling (InsamlingsID ,startdatum,status,insamlingsprofilURL,startaInsamlingURL,rapportURL, kommentar, kundID)"
-                            + "VALUES (?,?,?,?,?,?,?,?)" );
+            PreparedStatement stmt = cn.prepareStatement("INSERT INTO insamling (startdatum, status, kommentar, kundID)"
+                            + "VALUES (?,?,?,?)" );
+            
             //Värden som skickas med i SQL-satsen. 
             //1:an står för vilket at frågetecknen värdet ska ersätta.
             //Sedan metoden för att hämta värdet.
-            stmt.setInt(1, getInsamlingsNr());
-            stmt.setString(2, getStartDatum());
-            stmt.setString(3, getStatus());
-            stmt.setString(7, getKommentar());
-            stmt.setString(4, getInsamlingsprofil());
-            stmt.setString(5, getStartaInsamlingURL());
-            stmt.setString(6, getInsamlingsRapport());
-            stmt.setInt(8, 2);
+            //stmt.setInt(1, getInsamlingsNr());
+            stmt.setString(1, getStartDatum());
+            stmt.setString(2, getStatus());
+            stmt.setString(3, getKommentar());
+            //stmt.setString(4, getInsamlingsprofil());
+            //stmt.setString(5, getStartaInsamlingURL());
+            //stmt.setString(6, getInsamlingsRapport());
+            stmt.setInt(4, kundID2);
+            
+            
                        
             //Kör SQL-uttrycket
             int i = stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
-            if (i > 0) sRet = "success";
+            if (i > 0 && kundID2 > 0) sRet = "success";
             System.out.println("Test!");
             return sRet; //returnera status från SQL-exekvering (failure/success)
         }
@@ -455,5 +464,48 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
         }
             
             
+    }
+    
+    public int getNrOfInsamlingar() throws SQLException
+    {
+        //konrollera status på SQL-exekveringen        
+        String sRet = "failure";
+        Connection cn = null;
+        try 
+        {
+            //Uppkoppling mot databasen
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }                       
+            //SQL-statement som skickas till databasen:
+            PreparedStatement stmt = cn.prepareStatement("SELECT insamlingsID FROM insamling");
+            //Resultatet från SQL-satsen sparas i ett ResultSet                
+            ResultSet rs = stmt.executeQuery();
+            stmt.executeQuery();          
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity i = new InsamlingEntity();
+                i.setInsamlingsNr(rs.getInt("insamlingsID"));
+                
+            }        
+            
+            //Kör SQL-uttrycket
+            //stmt.executeUpdate();
+            //Kontrollerar så SQL-satsen gick in:
+            
+            return this.insamlingsNr;
+        }
+        
+        //Fångar fel:
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }
+        finally //Stänger anslutningen mot databasen:
+        {
+            if (cn!=null) 
+                cn.close();
+        }
     }
 }
