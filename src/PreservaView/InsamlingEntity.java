@@ -38,9 +38,49 @@ public class InsamlingEntity {
     public InsamlingEntity(){
 
     }
+    
+    public int getCustomerIdFromDb() throws SQLException
+    {
+        //konrollera status på SQL-exekveringen        
+        String sRet = "failure";
+        Connection cn = null;
+        try 
+        {
+            //Uppkoppling mot databasen
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }                       
+            //SQL-statement som skickas till databasen:
+            PreparedStatement stmt = cn.prepareStatement("SELECT kundID FROM kund WHERE namn = ?");
+            
+            stmt.setString(1, getKundnamn());           
+            ResultSet rs = stmt.executeQuery();       
+            CustomerEntity c = new CustomerEntity();
+                c.setCustomerNR(rs.getInt("kundID"));
+            //Kör SQL-uttrycket
+            //stmt.executeUpdate();
+            //Kontrollerar så SQL-satsen gick in:
+            
+            return c.getCustomerNr();
+        }
+        
+        //Fångar fel:
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage() +"(getCustomerFromDb)");
+        }
+        finally //Stänger anslutningen mot databasen:
+        {
+            if (cn!=null) 
+                cn.close();
+        }
+    }
+    
 public String addInsamling() throws SQLException 
     {        
         //konrollera status på SQL-exekveringen
+        int kundID2 = getCustomerIdFromDb();
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -51,13 +91,7 @@ public String addInsamling() throws SQLException
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
-            
-            //Hämtar kundID som är kopplat till Namnet i cmbKundnamn
-            PreparedStatement stmt2 = cn.prepareStatement("SELECT kundID FROM kund WHERE namn = ?");
-            
-            stmt2.setString(1, getKundnamn());
-            ResultSet rs2 = stmt2.executeQuery();
-            int kundID2 = rs2.getInt("kundID"); 
+                        
             //SQL-statement som skickas till databasen:
             PreparedStatement stmt = cn.prepareStatement("INSERT INTO insamling (startdatum, status, kommentar, kundID)"
                             + "VALUES (?,?,?,?)" );
@@ -79,13 +113,13 @@ public String addInsamling() throws SQLException
             //Kör SQL-uttrycket
             int i = stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
-            if (i > 0 && kundID2 > 0) sRet = "success";
-            System.out.println("Test!");
+            if (i > 0) sRet = "success";
+            
             return sRet; //returnera status från SQL-exekvering (failure/success)
         }
         //Fångar fel:
         catch (ClassNotFoundException | SQLException ex) {
-            throw new SQLException("Problem with db:" + ex.getMessage());
+            throw new SQLException("Problem with db:" + ex.getMessage() +"(addInsamling)");
         }
         finally //Stänger anslutningen mot databasen:
         {

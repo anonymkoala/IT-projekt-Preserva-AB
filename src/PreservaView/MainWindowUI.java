@@ -720,21 +720,14 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
         
         setInsamlingAttribute(insamling);
-        JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
+        
         //Connect to database and add the new customer.
         try {    
           //Anropa metod för att lägga till case
-            if (insamling.addInsamling().equals("success")){
-                DomainEntity d = new DomainEntity();
-                d.setDomain(insamling.getDoman());
-                d.setInsamlingsID(insamling.getNrOfInsamlingar());
-                d.addDomain();
-                if (d.addDomain().equals("success")){
+            if (insamling.addInsamling().equals("success")){                
             clearInsInputs();
             initInsamlingTable();
-                }else{
-                    JOptionPane.showMessageDialog(this, "Could not create new domainlist entry..");
-                }
+            JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
