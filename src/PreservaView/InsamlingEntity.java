@@ -28,6 +28,7 @@ public class InsamlingEntity {
     private String insamlingsURL;
     private String insamlingsRapport;
     private String kundnamn;
+    private int kundNr;
     private String startaInsamlingURL;
     private int insamlingsNr;
     public ResultSet res;
@@ -41,7 +42,7 @@ public class InsamlingEntity {
     
     public int getCustomerIdFromDb() throws SQLException
     {
-        //konrollera status på SQL-exekveringen        
+        //konrollera status på SQL-exekveringen         
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -56,14 +57,20 @@ public class InsamlingEntity {
             PreparedStatement stmt = cn.prepareStatement("SELECT kundID FROM kund WHERE namn = ?");
             
             stmt.setString(1, getKundnamn());           
-            ResultSet rs = stmt.executeQuery();       
-            CustomerEntity c = new CustomerEntity();
-                c.setCustomerNR(rs.getInt("kundID"));
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                //Skapar ett nytt objekt och fyller i variablerna
+                InsamlingEntity i = new InsamlingEntity();
+                i.setKundNr(rs.getInt("kundID"));
+                
+            }
+            
             //Kör SQL-uttrycket
             //stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
             
-            return c.getCustomerNr();
+            return this.kundNr;
         }
         
         //Fångar fel:
@@ -541,5 +548,13 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
             if (cn!=null) 
                 cn.close();
         }
+    }
+
+    public int getKundNr() {
+        return kundNr;
+    }
+
+    public void setKundNr(int kundNr) {
+        this.kundNr = kundNr;
     }
 }
