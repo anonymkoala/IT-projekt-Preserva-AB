@@ -84,7 +84,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
+        btnSamtliga = new javax.swing.JButton();
         btnSortPagaende = new javax.swing.JButton();
         btnSortEjStartade = new javax.swing.JButton();
         btnSortLevererade = new javax.swing.JButton();
@@ -154,13 +154,13 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton7.setBackground(new java.awt.Color(124, 126, 44));
-        jButton7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(51, 51, 51));
-        jButton7.setText("Samtliga");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnSamtliga.setBackground(new java.awt.Color(124, 126, 44));
+        btnSamtliga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnSamtliga.setForeground(new java.awt.Color(51, 51, 51));
+        btnSamtliga.setText("Samtliga");
+        btnSamtliga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnSamtligaActionPerformed(evt);
             }
         });
 
@@ -213,7 +213,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSamtliga, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSamtliga))
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -235,7 +235,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
+                    .addComponent(btnSamtliga)
                     .addComponent(lblSamtliga))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -636,7 +636,6 @@ public class MainWindowUI extends javax.swing.JFrame {
             insamlingList = i.getInsamling();
             //Töm tabellen först
             model.setRowCount(0);
-            System.out.println("Kommentar: " + i.getKommentar());
             //Loopa igenom listan (Arraylist) med Case 
             //och lägg till i tabellen för gränssnittet
             for (InsamlingEntity ins : insamlingList){
@@ -813,7 +812,15 @@ public class MainWindowUI extends javax.swing.JFrame {
     private void btnSortPagaendeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortPagaendeActionPerformed
         status = "Pågår";
         initSortedInsamlingTable(status);
-        // TODO add your handling code here:
+        Color selectedButton = Color.decode("#7C7E2C");
+        Color nonSelectedButton = Color.decode("#94B023");
+        btnSortPagaende.setBackground(selectedButton);
+        btnSamtliga.setBackground(nonSelectedButton);
+        btnSortEjStartade.setBackground(nonSelectedButton);
+        btnSortLevererade.setBackground(nonSelectedButton);
+       
+        
+        
     }//GEN-LAST:event_btnSortPagaendeActionPerformed
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
@@ -845,20 +852,37 @@ public class MainWindowUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnSamtligaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamtligaActionPerformed
         initInsamlingTable();
+        Color selectedButton = Color.decode("#7C7E2C");
+        Color nonSelectedButton = Color.decode("#94B023");
+        btnSortPagaende.setBackground(nonSelectedButton);
+        btnSamtliga.setBackground(selectedButton);
+        btnSortEjStartade.setBackground(nonSelectedButton);
+        btnSortLevererade.setBackground(nonSelectedButton);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnSamtligaActionPerformed
 
     private void btnSortEjStartadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortEjStartadeActionPerformed
         status = "Ej Startad";
         initSortedInsamlingTable(status);
-        // TODO add your handling code here:
+        Color selectedButton = Color.decode("#7C7E2C");
+        Color nonSelectedButton = Color.decode("#94B023");
+        btnSortPagaende.setBackground(nonSelectedButton);
+        btnSamtliga.setBackground(nonSelectedButton);
+        btnSortEjStartade.setBackground(selectedButton);
+        btnSortLevererade.setBackground(nonSelectedButton);
     }//GEN-LAST:event_btnSortEjStartadeActionPerformed
 
     private void btnSortLevereradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortLevereradeActionPerformed
         status = "Levererad";
         initSortedInsamlingTable(status);
+        Color selectedButton = Color.decode("#7C7E2C");
+        Color nonSelectedButton = Color.decode("#94B023");
+        btnSortPagaende.setBackground(nonSelectedButton);
+        btnSamtliga.setBackground(nonSelectedButton);
+        btnSortEjStartade.setBackground(nonSelectedButton);
+        btnSortLevererade.setBackground(selectedButton);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSortLevereradeActionPerformed
     //Gets todays date
@@ -948,6 +972,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList JlistDomanNamn;
     private javax.swing.JButton btnCreateInsamling;
+    private javax.swing.JButton btnSamtliga;
     private javax.swing.JButton btnSortEjStartade;
     private javax.swing.JButton btnSortLevererade;
     private javax.swing.JButton btnSortPagaende;
@@ -963,7 +988,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTextField customerStreetTxtField;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton7;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
