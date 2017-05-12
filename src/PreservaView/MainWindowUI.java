@@ -40,6 +40,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     DefaultListModel listModel = new DefaultListModel();
     DefaultListModel listInsamling = new DefaultListModel();
     InsamlingEntity insamling = new InsamlingEntity();
+    DomainEntity domainE = new DomainEntity();
     private String status = "";
     /**
      * Creates new form MainWindow
@@ -416,7 +417,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -462,14 +463,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                     .addGap(114, 114, 114)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -718,15 +719,22 @@ public class MainWindowUI extends javax.swing.JFrame {
 //Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
         
-        setInsamlingAttribute(insamling);
-        
+        setInsamlingAttribute(insamling); 
+        try {
+            setDomainAttribute(domainE);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //Connect to database and add the new customer.
         try {    
-          //Anropa metod för att lägga till case
-            if (insamling.addInsamling().equals("success")){                
-            clearInsInputs();
-            initInsamlingTable();
-            JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
+          //Anropa metod för att lägga till insamling                                                                       
+            //domainE.createDomain();
+            if (insamling.addInsamling().equals("success")){                     
+                domainE.createDomain();
+                clearInsInputs();
+                initInsamlingTable();
+                JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
+                    
             }else{
                 JOptionPane.showMessageDialog(this, "Could not create new insamling..");
             }
@@ -743,6 +751,11 @@ public class MainWindowUI extends javax.swing.JFrame {
             }
     }    
     
+    private void setDomainAttribute(DomainEntity domainE) throws SQLException{
+        domainE.setDomain(insamling.getDoman());
+        domainE.setInsamlingsID(insamling.getNrOfInsamlingar()+1);        
+    }
+
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 

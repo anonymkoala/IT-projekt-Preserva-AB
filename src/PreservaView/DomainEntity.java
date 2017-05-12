@@ -23,9 +23,17 @@ private int domainListID;
 private int insamlingsID;
 
 
-public String addDomain() throws SQLException 
-    {        
-        //konrollera status på SQL-exekveringen
+public String createDomain() throws SQLException
+{
+    String sRet = "failure";
+        if (addDomain().equals("success") && addDomainList().equals("success")) sRet = "success";                    
+            
+            return sRet;    
+}
+
+public String addDomainList() throws SQLException
+{
+   //konrollera status på SQL-exekveringen
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -46,15 +54,48 @@ public String addDomain() throws SQLException
             stmt.setInt(1, getInsamlingsID());
             stmt.setString(2, getDomain());
             
-            PreparedStatement stmt2 = cn.prepareStatement("INSERT INTO domain (domain) VALUES (?)");
-            stmt2.setString(1, getDomain());
+            
+            int i = stmt.executeUpdate();
+            //Kontrollerar så SQL-satsen gick in:
+            if (i > 0) sRet = "success";
+            return sRet; //returnera status från SQL-exekvering (failure/success)
+        }
+        //Fångar fel:
+        catch (ClassNotFoundException | SQLException ex) {
+            throw new SQLException("Problem with db:" + ex.getMessage());
+        }
+        finally //Stänger anslutningen mot databasen:
+        {
+            if (cn!=null) 
+                cn.close();
+        } 
+}
+
+public String addDomain() throws SQLException 
+    {        
+        //konrollera status på SQL-exekveringen
+        String sRet = "failure";
+        Connection cn = null;
+        try 
+        {
+            //Uppkoppling mot databasen
+            Class.forName("com.mysql.jdbc.Driver");            
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            if (cn == null){
+                throw new SQLException("No connection to target database!");
+            }
+                       
+            //SQL-statement som skickas till databasen:            
+            
+            PreparedStatement stmt = cn.prepareStatement("INSERT INTO domain (domain) VALUES (?)");
+            stmt.setString(1, getDomain());
             
                        
             //Kör SQL-uttrycket
-            int y = stmt2.executeUpdate();
-            int x = stmt.executeUpdate();
+            
+            int i = stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
-            if (x > 0 && y > 0) sRet = "success";
+            if (i > 0) sRet = "success";
             return sRet; //returnera status från SQL-exekvering (failure/success)
         }
         //Fångar fel:
@@ -68,7 +109,7 @@ public String addDomain() throws SQLException
         }
     }
 
-public int getNrOfDomainList() throws SQLException
+public int getNrOfDomains() throws SQLException
     {
         //konrollera status på SQL-exekveringen        
         String sRet = "failure";

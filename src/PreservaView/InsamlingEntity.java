@@ -29,6 +29,7 @@ public class InsamlingEntity {
     private String insamlingsRapport;
     private String kundnamn;
     private int kundNr;
+    private int insamlingsIndex;
     private String startaInsamlingURL;
     private int insamlingsNr;
     public ResultSet res;
@@ -84,8 +85,7 @@ public class InsamlingEntity {
 public String addInsamling() throws SQLException 
     {        
         
-        int kundID2 = getCustomerIdFromDb();
-        System.out.println("KundID2: " +kundID2);
+        int kundID2 = getCustomerIdFromDb();        
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -117,6 +117,8 @@ public String addInsamling() throws SQLException
                        
             //Kör SQL-uttrycket
             int i = stmt.executeUpdate();
+            
+            
             //Kontrollerar så SQL-satsen gick in:
             if (i > 0) sRet = "success";
             
@@ -510,6 +512,8 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
         //konrollera status på SQL-exekveringen        
         String sRet = "failure";
         Connection cn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
         try 
         {
             //Uppkoppling mot databasen
@@ -519,22 +523,21 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
                 throw new SQLException("No connection to target database!");
             }                       
             //SQL-statement som skickas till databasen:
-            PreparedStatement stmt = cn.prepareStatement("SELECT insamlingsID FROM insamling");
+            stmt = cn.prepareStatement("SELECT insamlingsID FROM insamling");
             //Resultatet från SQL-satsen sparas i ett ResultSet                
-            ResultSet rs = stmt.executeQuery();
-            stmt.executeQuery();          
+            rs = stmt.executeQuery();
+                      
             while (rs.next()){
                 //Skapar ett nytt objekt och fyller i variablerna
-                InsamlingEntity i = new InsamlingEntity();
-                i.setInsamlingsNr(rs.getInt("insamlingsID"));
-                
+                setInsamlingsIndex(rs.getInt("insamlingsID"));
             }        
             
             //Kör SQL-uttrycket
             //stmt.executeUpdate();
             //Kontrollerar så SQL-satsen gick in:
+            //System.out.println("InsamlingsID som returneras: "+getInsamlingsIndex());
             
-            return this.insamlingsNr;
+            return this.insamlingsIndex;
         }
         
         //Fångar fel:
@@ -554,5 +557,13 @@ public ArrayList<InsamlingEntity> getSpecificInsamling(String status) throws SQL
 
     public void setKundNr(int kundNr) {
         this.kundNr = kundNr;
+    }
+
+    public int getInsamlingsIndex() {
+        return insamlingsIndex;
+    }
+
+    public void setInsamlingsIndex(int insamlingsIndex) {
+        this.insamlingsIndex = insamlingsIndex;
     }
 }
