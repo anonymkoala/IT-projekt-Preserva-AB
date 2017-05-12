@@ -42,7 +42,7 @@ public class InsamlingEntity {
     
     public int getCustomerIdFromDb() throws SQLException
     {
-        //konrollera status på SQL-exekveringen         
+        //konrollera status på SQL-exekveringen                 
         String sRet = "failure";
         Connection cn = null;
         try 
@@ -60,16 +60,13 @@ public class InsamlingEntity {
             ResultSet rs = stmt.executeQuery();
             
             while (rs.next()){
-                //Skapar ett nytt objekt och fyller i variablerna
-                InsamlingEntity i = new InsamlingEntity();
-                i.setKundNr(rs.getInt("kundID"));
-                
+                //Skapar ett nytt objekt och fyller i variablerna                
+                setKundNr(rs.getInt("kundID"));                                
             }
             
             //Kör SQL-uttrycket
             //stmt.executeUpdate();
-            //Kontrollerar så SQL-satsen gick in:
-            
+            //Kontrollerar så SQL-satsen gick in:            
             return this.kundNr;
         }
         
@@ -86,8 +83,9 @@ public class InsamlingEntity {
     
 public String addInsamling() throws SQLException 
     {        
-        //konrollera status på SQL-exekveringen
+        
         int kundID2 = getCustomerIdFromDb();
+        System.out.println("KundID2: " +kundID2);
         String sRet = "failure";
         Connection cn = null;
         try 
