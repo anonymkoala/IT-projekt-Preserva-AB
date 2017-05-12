@@ -282,7 +282,10 @@ public String addInsamling() throws SQLException
     {
         //Samma uppkopplingskod som i övriga metoder
         String sret = "failure";
-        Connection cn = null;       
+        Connection cn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
         try{            
             Class.forName("com.mysql.jdbc.Driver");            
             cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola"); 
@@ -290,22 +293,20 @@ public String addInsamling() throws SQLException
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
-            PreparedStatement stmt = cn.prepareStatement("SELECT InsamlingsID,startdatum,"
-                    + "status,insamlingsprofilURL,startaInsamlingURL,rapportURL,"
-                    + "kommentar,kundID FROM insamling");          
+            stmt = cn.prepareStatement("SELECT i.insamlingsID, k.namn, i.startdatum, d.domain, i.status, i.kommentar FROM preservaDB.insamling AS i INNER JOIN kund AS k ON k.kundID = i.kundID INNER JOIN domainList AS d ON d.insamlingsID = i.insamlingsID");          
             //Resultatet från SQL-satsen sparas i ett ResultSet
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
             //Listan töms och fylls sedan på med ResultSet
             insamlingList.clear();            
             while (rs.next()){
                 //Skapar ett nytt objekt och fyller i variablerna
                 InsamlingEntity in = new InsamlingEntity();
-                in.setInsamlingsNr(rs.getInt("InsamlingsID"));
-                in.setKundnamn(rs.getString("kundID"));
-                in.setStartDatum(rs.getString("startdatum"));
-                in.setStatus(rs.getString("status"));
-                in.setKommentar(rs.getString("kommentar"));
-                in.setInsamlingsURL(rs.getString("rapportURL"));
+                in.setInsamlingsNr(rs.getInt("i.insamlingsID"));
+                in.setKundnamn(rs.getString("k.namn"));
+                in.setStartDatum(rs.getString("i.startdatum"));
+                in.setStatus(rs.getString("i.status"));
+                in.setKommentar(rs.getString("i.kommentar"));
+                in.setDoman(rs.getString("d.domain"));
                 insamlingList.add(in);                
             }
             
