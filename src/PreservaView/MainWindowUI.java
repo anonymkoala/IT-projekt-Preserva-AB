@@ -650,7 +650,8 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }        
     }
-        public void initSortedInsamlingTable(String status) {            
+    
+    public void initSortedInsamlingTable(String status) {            
       DefaultTableModel model = (DefaultTableModel) jTable1.getModel();  
       
       InsamlingEntity i = new InsamlingEntity();
@@ -877,7 +878,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSamtligaActionPerformed
 
     private void btnSortEjStartadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortEjStartadeActionPerformed
-        status = "Ej Startad";
+        status = "Ej startad";
         initSortedInsamlingTable(status);
         Color selectedButton = Color.decode("#7C7E2C");
         Color nonSelectedButton = Color.decode("#94B023");
