@@ -82,7 +82,7 @@ public class InsamlingEntity {
         }
     }
     
-public String addInsamling() throws SQLException 
+    public String addInsamling() throws SQLException 
     {        
         
         int kundID2 = getCustomerIdFromDb();        
@@ -307,7 +307,7 @@ public String addInsamling() throws SQLException
                 in.setStatus(rs.getString("i.status"));
                 in.setKommentar(rs.getString("i.kommentar"));
                 in.setDoman(rs.getString("d.domain"));
-                insamlingList.add(in);                
+                insamlingList.add(in);      
             }
             
             return insamlingList;

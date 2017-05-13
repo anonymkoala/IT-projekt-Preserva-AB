@@ -94,6 +94,8 @@ public class MainWindowUI extends javax.swing.JFrame {
         lblEjStartade = new javax.swing.JLabel();
         lblLevererade = new javax.swing.JLabel();
         saveBtn = new javax.swing.JButton();
+        btnFardiga = new javax.swing.JButton();
+        lblFardiga = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -209,6 +211,17 @@ public class MainWindowUI extends javax.swing.JFrame {
             }
         });
 
+        btnFardiga.setBackground(new java.awt.Color(148, 176, 35));
+        btnFardiga.setText("Färdiga");
+        btnFardiga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFardigaActionPerformed(evt);
+            }
+        });
+
+        lblFardiga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblFardiga.setText("20");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -222,15 +235,19 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPagaende))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEjStartade))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnSortLevererade, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLevererade))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnFardiga, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEjStartade)
+                    .addComponent(lblFardiga)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,11 +265,15 @@ public class MainWindowUI extends javax.swing.JFrame {
                     .addComponent(lblEjStartade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFardiga)
+                    .addComponent(lblFardiga))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSortLevererade)
                     .addComponent(lblLevererade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(saveBtn)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jScrollPane4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(148, 176, 35), 2, true));
@@ -321,7 +342,7 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         cmbInsamlingsprofil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Profil1", "Profil2", "Ny Profil" }));
 
-        cmbBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ej startad", "Pågår", "Klar", "Levererad" }));
+        cmbBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ej startad", "Pågår", "Färdig", "Levererad" }));
 
         txtAreaKommentar.setColumns(20);
         txtAreaKommentar.setLineWrap(true);
@@ -463,14 +484,14 @@ public class MainWindowUI extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
                                     .addGap(114, 114, 114)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1093, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1077, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,6 +658,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             insamlingList = i.getInsamling();
             //Töm tabellen först
             model.setRowCount(0);
+            
             //Loopa igenom listan (Arraylist) med Case 
             //och lägg till i tabellen för gränssnittet
             for (InsamlingEntity ins : insamlingList){
@@ -832,6 +854,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         btnSamtliga.setBackground(nonSelectedButton);
         btnSortEjStartade.setBackground(nonSelectedButton);
         btnSortLevererade.setBackground(nonSelectedButton);
+        btnFardiga.setBackground(nonSelectedButton);
        
         
         
@@ -874,6 +897,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         btnSamtliga.setBackground(selectedButton);
         btnSortEjStartade.setBackground(nonSelectedButton);
         btnSortLevererade.setBackground(nonSelectedButton);
+        btnFardiga.setBackground(nonSelectedButton);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSamtligaActionPerformed
 
@@ -886,6 +910,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         btnSamtliga.setBackground(nonSelectedButton);
         btnSortEjStartade.setBackground(selectedButton);
         btnSortLevererade.setBackground(nonSelectedButton);
+        btnFardiga.setBackground(nonSelectedButton);
     }//GEN-LAST:event_btnSortEjStartadeActionPerformed
 
     private void btnSortLevereradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortLevereradeActionPerformed
@@ -897,8 +922,22 @@ public class MainWindowUI extends javax.swing.JFrame {
         btnSamtliga.setBackground(nonSelectedButton);
         btnSortEjStartade.setBackground(nonSelectedButton);
         btnSortLevererade.setBackground(selectedButton);
+        btnFardiga.setBackground(nonSelectedButton);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSortLevereradeActionPerformed
+
+    private void btnFardigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFardigaActionPerformed
+        status = "Färdig";
+        initSortedInsamlingTable(status);
+        Color selectedButton = Color.decode("#7C7E2C");
+        Color nonSelectedButton = Color.decode("#94B023");
+        btnSortPagaende.setBackground(nonSelectedButton);
+        btnFardiga.setBackground(selectedButton);
+        btnSamtliga.setBackground(nonSelectedButton);
+        btnSortEjStartade.setBackground(nonSelectedButton);
+        btnSortLevererade.setBackground(nonSelectedButton);
+        // TODO add your handling code here:       // TODO add your handling code here:
+    }//GEN-LAST:event_btnFardigaActionPerformed
     //Gets todays date
     private String getDate() {
         Calendar currentDate = Calendar.getInstance(); //Hämta nuvarande datum
@@ -986,6 +1025,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList JlistDomanNamn;
     private javax.swing.JButton btnCreateInsamling;
+    private javax.swing.JButton btnFardiga;
     private javax.swing.JButton btnSamtliga;
     private javax.swing.JButton btnSortEjStartade;
     private javax.swing.JButton btnSortLevererade;
@@ -1033,6 +1073,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAddDoman;
     private javax.swing.JLabel lblEjStartade;
+    private javax.swing.JLabel lblFardiga;
     private javax.swing.JLabel lblLevererade;
     private javax.swing.JLabel lblPagaende;
     private javax.swing.JLabel lblSamtliga;
@@ -1050,6 +1091,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             lblPagaende.setText(i.getInsamlingCount("Pågår"));
             lblEjStartade.setText(i.getInsamlingCount("Ej Startad"));
             lblLevererade.setText(i.getInsamlingCount("Levererad"));
+            lblFardiga.setText(i.getInsamlingCount("Färdig"));
         } catch (SQLException ex) {
             Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
         }
