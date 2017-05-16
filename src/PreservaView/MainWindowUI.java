@@ -287,7 +287,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             new String [] {
                 "Insamlingsnummer", "Kundnamn", "Startdatum", "Domän", "Status", "Kommentar", "URL", "Rapport", "Starta insamling"
             }
-        ));
+        ){public boolean isCellEditable(int row, int column){return false;}});
         jTable1.setToolTipText("");
         jScrollPane4.setViewportView(jTable1);
 
@@ -457,7 +457,6 @@ public class MainWindowUI extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(txtInsamlingsdoman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAddDoman))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -636,7 +635,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     //initierar tabellen i MainWindowUI
     public void initInsamlingTable() {            
       DefaultTableModel model = (DefaultTableModel) jTable1.getModel();  
-      
+      jTable1.setFocusable(false);
       InsamlingEntity i = new InsamlingEntity();
       
       ArrayList<InsamlingEntity> insamlingList = new ArrayList<>();
