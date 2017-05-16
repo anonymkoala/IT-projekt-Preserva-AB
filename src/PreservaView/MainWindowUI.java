@@ -182,7 +182,7 @@ public class MainWindowUI extends javax.swing.JFrame {
         });
 
         btnSortLevererade.setBackground(new java.awt.Color(148, 176, 35));
-        btnSortLevererade.setText("Levererade");
+        btnSortLevererade.setText("Levererad");
         btnSortLevererade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSortLevereradeActionPerformed(evt);
