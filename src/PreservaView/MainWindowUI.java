@@ -730,18 +730,12 @@ public class MainWindowUI extends javax.swing.JFrame {
 //Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
         if(JlistDomanNamn.getModel().getSize()!=0){
-        setInsamlingAttribute(insamling); 
-        try {
-            setDomainAttribute(domainE);
-        } catch (SQLException ex) {
-            Logger.getLogger(MainWindowUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setInsamlingAttribute(insamling);         
         //Connect to database and add the new customer.
         try {    
           //Anropa metod för att lägga till insamling                                                                       
             //domainE.createDomain();
-            if (insamling.addInsamling().equals("success")){                     
-                domainE.createDomain();
+            if (insamling.addInsamling().equals("success")){                                     
                 clearInsInputs();
                 initInsamlingTable();
                 JOptionPane.showMessageDialog(rootPane, "Insamling skapad");
@@ -764,10 +758,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             listModel.addElement(domannamnArray.get(i));
             }
     }    
-    private void setDomainAttribute(DomainEntity domainE) throws SQLException{
-        domainE.setDomain(insamling.getDoman());
-        domainE.setInsamlingsID(insamling.getNrOfInsamlingar()+1);        
-    }
+    
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
         insamling.setKundnamn(cmbKundnamn.getSelectedItem().toString()); 

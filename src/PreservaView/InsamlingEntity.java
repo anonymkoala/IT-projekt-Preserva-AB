@@ -92,33 +92,28 @@ public class InsamlingEntity {
         {
             //Uppkoppling mot databasen
             Class.forName("com.mysql.jdbc.Driver");            
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB","root","skola");                        
+            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/preservaDB?allowMultiQueries=true","root","skola");                        
             if (cn == null){
                 throw new SQLException("No connection to target database!");
             }
                         
             //SQL-statement som skickas till databasen:
-            PreparedStatement stmt = cn.prepareStatement("INSERT INTO insamling (startdatum, status, kommentar, kundID)"
-                            + "VALUES (?,?,?,?)" );
-            
-            //Värden som skickas med i SQL-satsen. 
-            //1:an står för vilket at frågetecknen värdet ska ersätta.
-            //Sedan metoden för att hämta värdet.
-            //stmt.setInt(1, getInsamlingsNr());
+            PreparedStatement stmt = cn.prepareStatement("INSERT INTO preservadb.insamling (startdatum, status, kommentar, kundID)"
+                + "VALUES (?,?,?,?);"
+                + "SET @last_insert_ID = LAST_INSERT_ID();"
+                + "INSERT INTO preservadb.`domain` (`domain`) VALUES (?);"                    
+                + "INSERT INTO preservadb.domainlist (insamlingsID, `domain`) VALUES (@last_insert_ID, ?) ");
+                        
             stmt.setString(1, getStartDatum());
             stmt.setString(2, getStatus());
-            stmt.setString(3, getKommentar());
-            //stmt.setString(4, getInsamlingsprofil());
-            //stmt.setString(5, getStartaInsamlingURL());
-            //stmt.setString(6, getInsamlingsRapport());
+            stmt.setString(3, getKommentar());            
             stmt.setInt(4, kundID2);
-            
-            
-                       
+            stmt.setString(5, getDoman());
+            stmt.setString(6, getDoman());
+                                               
             //Kör SQL-uttrycket
             int i = stmt.executeUpdate();
-            
-            
+                        
             //Kontrollerar så SQL-satsen gick in:
             if (i > 0) sRet = "success";
             
