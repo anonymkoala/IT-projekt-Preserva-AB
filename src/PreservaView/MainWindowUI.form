@@ -587,7 +587,7 @@
                           <StringArray count="3">
                             <StringItem index="0" value="Profil1"/>
                             <StringItem index="1" value="Profil2"/>
-                            <StringItem index="2" value="Ny Profil"/>
+                            <StringItem index="2" value=" "/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -755,22 +755,15 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton2" min="-2" pref="105" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="customerNameTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="customerPhoneNumberTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="customerEmailTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="customerCityTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="customerStreetTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Component id="customerPostCodeTxtField" min="-2" pref="289" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="createNewCustomerBtn" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="customerNameTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerPhoneNumberTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerEmailTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerCityTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerStreetTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="customerPostCodeTxtField" min="-2" pref="289" max="-2" attributes="0"/>
+                                  <Component id="createNewCustomerBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="679" max="32767" attributes="0"/>
+                              <EmptySpace pref="714" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -808,26 +801,13 @@
                                   <Component id="customerPostCodeTxtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="16" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="createNewCustomerBtn" pref="35" max="32767" attributes="0"/>
-                                  <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="35" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                              <Component id="createNewCustomerBtn" min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton3">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="23" green="b0" red="94" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Insamlingsprofil"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JButton" name="createNewCustomerBtn">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -880,14 +860,6 @@
                     <Component class="javax.swing.JTextField" name="customerStreetTxtField">
                     </Component>
                     <Component class="javax.swing.JTextField" name="customerPostCodeTxtField">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="23" green="b0" red="94" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Redigera"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
