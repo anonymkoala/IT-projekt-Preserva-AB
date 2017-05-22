@@ -623,7 +623,7 @@ public class MainWindowUI extends javax.swing.JFrame {
             //Loopa igenom listan (Arraylist) med Case 
             //och lägg till i tabellen för gränssnittet
             for (InsamlingEntity ins : insamlingList){
-            model.addRow(new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
+            model.insertRow(0, new Object[]{ins.getInsamlingsNr(),ins.getKundnamn() , ins.getStartDatum(),
             ins.getDoman(), ins.getStatus(), ins.getKommentar(), justForDemoPurpose(), justForDemoPurpose(), justForDemoPurpose()});            
             }
         }
