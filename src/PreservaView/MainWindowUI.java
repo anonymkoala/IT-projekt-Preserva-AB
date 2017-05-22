@@ -702,7 +702,7 @@ public class MainWindowUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKundnamnActionPerformed
 //Creates a new insamling and updates the mainGUI
     private void btnCreateInsamlingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateInsamlingActionPerformed
-        if(JlistDomanNamn.getModel().getSize()!=0){
+        //if(JlistDomanNamn.getModel().getSize()!=0){
         setInsamlingAttribute(insamling);         
         //Connect to database and add the new customer.
         try {    
@@ -720,17 +720,16 @@ public class MainWindowUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
         }
         initGUIMainFrame();
-        }
-        else
-            JOptionPane.showMessageDialog(rootPane, "Obs, kom ihåg att lägga till domänadress");
+        
+        
     }//GEN-LAST:event_btnCreateInsamlingActionPerformed
     public void initJlistDoman() {
         JlistDomanNamn.setModel(listModel);  
         listModel.clear();
         for(int i = 0; i < domannamnArray.size(); i++){
             listModel.addElement(domannamnArray.get(i));
-            }
-    }    
+            
+    }}    
     
     //Sets insamlingAttribute based on inputs made in register insamling-tab. 
     private void setInsamlingAttribute(InsamlingEntity insamling) {
