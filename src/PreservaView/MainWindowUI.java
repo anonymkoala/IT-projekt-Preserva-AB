@@ -93,7 +93,6 @@ public class MainWindowUI extends javax.swing.JFrame {
         lblPagaende = new javax.swing.JLabel();
         lblEjStartade = new javax.swing.JLabel();
         lblLevererade = new javax.swing.JLabel();
-        saveBtn = new javax.swing.JButton();
         btnFardiga = new javax.swing.JButton();
         lblFardiga = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -199,14 +198,6 @@ public class MainWindowUI extends javax.swing.JFrame {
         lblLevererade.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         lblLevererade.setText("60");
 
-        saveBtn.setBackground(new java.awt.Color(148, 176, 35));
-        saveBtn.setText("Spara ändringar");
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
-            }
-        });
-
         btnFardiga.setBackground(new java.awt.Color(148, 176, 35));
         btnFardiga.setText("Färdiga");
         btnFardiga.addActionListener(new java.awt.event.ActionListener() {
@@ -223,27 +214,28 @@ public class MainWindowUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnSamtliga, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSamtliga))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(btnSortPagaende, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPagaende))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnSortLevererade, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblLevererade))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnFardiga, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEjStartade)
-                    .addComponent(lblFardiga)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnSortLevererade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLevererade))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnSamtliga, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSamtliga))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnSortPagaende, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPagaende))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnFardiga, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSortEjStartade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEjStartade)
+                            .addComponent(lblFardiga))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,9 +259,7 @@ public class MainWindowUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSortLevererade)
                     .addComponent(lblLevererade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                .addComponent(saveBtn)
-                .addGap(19, 19, 19))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jScrollPane4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(148, 176, 35), 2, true));
@@ -295,8 +285,8 @@ public class MainWindowUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -334,7 +324,7 @@ public class MainWindowUI extends javax.swing.JFrame {
 
         jLabel16.setText("Kund:");
 
-        cmbInsamlingsprofil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Profil1", "Profil2", " " }));
+        cmbInsamlingsprofil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Profil1", "Profil2" }));
 
         cmbBoxStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ej startad", "Pågår", "Färdig", "Levererad" }));
 
@@ -823,35 +813,6 @@ public class MainWindowUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSortPagaendeActionPerformed
 
-    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        //Skapar table
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
-        //Skapar nytt Insamlingsobjekt
-        InsamlingEntity i = new InsamlingEntity();
-        
-        //Hämtar index för raden som är vald
-        int tblindex = jTable1.getSelectedRow();
-        
-        //Hämtar Insamlingsnummer och Kommentar för vald rad
-        i.setInsamlingsNr((int)jTable1.getValueAt(tblindex, 0));
-        i.setKommentar((String)jTable1.getValueAt(tblindex, 5));
-        
-        //Uppdaterar databasen med informationen i jTable
-        try {    
-          //Anropa metod för att uppdatera Insamling
-            if (i.updateInsamling().equals("success")){
-                JOptionPane.showMessageDialog(this, "Insamling uppdaterad!");
-            }else{
-                JOptionPane.showMessageDialog(this, "Något gick fel. Uppdatering ej genomförd.");
-            }
-        } catch (SQLException | HeadlessException ex) {
-            JOptionPane.showMessageDialog(this, "ERROR: " + ex.getMessage());
-        }
-        initInsamlingTable();
-        
-    }//GEN-LAST:event_saveBtnActionPerformed
-
     private void btnSamtligaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSamtligaActionPerformed
         initInsamlingTable();
         Color selectedButton = Color.decode("#7C7E2C");
@@ -1037,7 +998,6 @@ public class MainWindowUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblPagaende;
     private javax.swing.JLabel lblSamtliga;
     private javax.swing.JLabel lblSkapaInsProfil;
-    private javax.swing.JButton saveBtn;
     private javax.swing.JTextArea txtAreaKommentar;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtInsamlingsdoman;
